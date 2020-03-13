@@ -35,15 +35,27 @@ const CarouselHome = () => {
       position: "text-left"
     }
   ]);
+  const options = {
+    items: 1,
+    loop: true,
+    dots: true,
+    autoPlay: true,
+    responsive: {
+      0: {
+        dots: false
+      },
+      767: {
+        dots: false
+      },
+      768: {
+        dots: true
+      }
+    }
+  };
+
   return (
     <div id="carousel-home">
-      <OwlCarousel
-        items="1"
-        loop
-        dots
-        autoPlay
-        className="owl-carousel owl-theme"
-      >
+      <OwlCarousel {...options} className="owl-carousel owl-theme">
         {slider.map((item, index) => (
           <div
             className="owl-slide cover"

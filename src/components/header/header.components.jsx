@@ -1,10 +1,11 @@
 import React from "react";
 
-const Header = () => (
+import { Link } from "react-router-dom";
+
+const Header = ({ currentUser }) => (
   <div>
     <div className="layer" />
-    {/* Mobile menu overlay mask */}
-    {/* Header================================================== */}
+
     <header>
       <div id="top_line">
         <div className="container">
@@ -16,9 +17,13 @@ const Header = () => (
             <div className="col-6">
               <ul id="top_links">
                 <li>
-                  <a href="/sign-in-dialog" id="access_link">
-                    Sign in
-                  </a>
+                  {currentUser ? (
+                    <span>Sign Out</span>
+                  ) : (
+                    <Link to="/sign-in" id="access_link">
+                      Sign in
+                    </Link>
+                  )}
                 </li>
                 <li>
                   <a href="wishlist.html" id="wishlist_link">
@@ -38,9 +43,9 @@ const Header = () => (
           <div className="col-3">
             <div id="logo_home">
               <h1>
-                <a href="index.html" title="City tours travel template">
+                <Link to="/" title="City tours travel template">
                   City Tours travel template
-                </a>
+                </Link>
               </h1>
             </div>
           </div>
@@ -66,9 +71,14 @@ const Header = () => (
               </a>
               <ul>
                 <li className="submenu">
-                  <a href="/" className="show-submenu">
+                  <Link to="/" className="show-submenu">
                     Home
-                  </a>
+                  </Link>
+                </li>
+                <li className="submenu">
+                  <Link to="/about" className="show-submenu">
+                    About
+                  </Link>
                 </li>
                 <li className="submenu">
                   <a href="/" className="show-submenu">
@@ -283,168 +293,6 @@ const Header = () => (
                       </a>
                     </li>
                   </ul>
-                </li>
-                <li className="megamenu submenu">
-                  <a href="/" className="show-submenu-mega">
-                    Pages
-                    <i className="icon-down-open-mini" />
-                  </a>
-                  <div className="menu-wrapper">
-                    <div className="row">
-                      <div className="col-lg-4">
-                        <h3>Pages</h3>
-                        <ul>
-                          <li>
-                            <a href="about.html">About us</a>
-                          </li>
-                          <li>
-                            <a href="general_page.html">General page</a>
-                          </li>
-                          <li>
-                            <a href="tourist_guide.html">Tourist guide</a>
-                          </li>
-                          <li>
-                            <a href="wishlist.html">Wishlist page</a>
-                          </li>
-                          <li>
-                            <a href="faq.html">Faq</a>
-                          </li>
-                          <li>
-                            <a href="faq_2.html">Faq smooth scroll</a>
-                          </li>
-                          <li>
-                            <a href="pricing_tables.html">Pricing tables</a>
-                          </li>
-                          <li>
-                            <a href="gallery_3_columns.html">
-                              Gallery 3 columns
-                            </a>
-                          </li>
-                          <li>
-                            <a href="gallery_4_columns.html">
-                              Gallery 4 columns
-                            </a>
-                          </li>
-                          <li>
-                            <a href="grid_gallery_1.html">Grid gallery</a>
-                          </li>
-                          <li>
-                            <a href="grid_gallery_2.html">
-                              Grid gallery with filters
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-lg-4">
-                        <h3>Pages</h3>
-                        <ul>
-                          <li>
-                            <a href="contact_us_1.html">Contact us 1</a>
-                          </li>
-                          <li>
-                            <a href="contact_us_2.html">Contact us 2</a>
-                          </li>
-                          <li>
-                            <a href="blog_right_sidebar.html">Blog</a>
-                          </li>
-                          <li>
-                            <a href="blog.html">Blog left sidebar</a>
-                          </li>
-                          <li>
-                            <a href="login.html">Login</a>
-                          </li>
-                          <li>
-                            <a href="register.html">Register</a>
-                          </li>
-                          <li>
-                            <a href="invoice.html" target="_blank">
-                              Invoice
-                            </a>
-                          </li>
-                          <li>
-                            <a href="404.html">404 Error page</a>
-                          </li>
-                          <li>
-                            <a href="site_launch/index.html">
-                              Site launch / Coming soon
-                            </a>
-                          </li>
-                          <li>
-                            <a href="timeline.html">Tour timeline</a>
-                          </li>
-                          <li>
-                            <a href="page_with_map.html">
-                              <i className="icon-map" /> Full screen map
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-lg-4">
-                        <h3>Elements</h3>
-                        <ul>
-                          <li>
-                            <a href="footer_2.html">
-                              <i className="icon-columns" /> Footer with working
-                              newsletter
-                            </a>
-                          </li>
-                          <li>
-                            <a href="footer_5.html">
-                              <i className="icon-columns" /> Footer with Twitter
-                              feed
-                            </a>
-                          </li>
-                          <li>
-                            <a href="icon_pack_1.html">
-                              <i className="icon-inbox-alt" /> Icon pack 1
-                              (1900)
-                            </a>
-                          </li>
-                          <li>
-                            <a href="icon_pack_2.html">
-                              <i className="icon-inbox-alt" /> Icon pack 2 (100)
-                            </a>
-                          </li>
-                          <li>
-                            <a href="icon_pack_3.html">
-                              <i className="icon-inbox-alt" /> Icon pack 3 (30)
-                            </a>
-                          </li>
-                          <li>
-                            <a href="icon_pack_4.html">
-                              <i className="icon-inbox-alt" /> Icon pack 4 (200)
-                            </a>
-                          </li>
-                          <li>
-                            <a href="icon_pack_5.html">
-                              <i className="icon-inbox-alt" /> Icon pack 5 (360)
-                            </a>
-                          </li>
-                          <li>
-                            <a href="shortcodes.html">
-                              <i className="icon-tools" /> Shortcodes
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              href="newsletter_template/newsletter.html"
-                              target="blank"
-                            >
-                              <i className=" icon-mail" /> Responsive email
-                              template
-                            </a>
-                          </li>
-                          <li>
-                            <a href="admin.html">
-                              <i className="icon-cog-1" /> Admin area
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* End row */}
-                  </div>
-                  {/* End menu-wrapper */}
                 </li>
               </ul>
             </div>
