@@ -7,31 +7,29 @@ const Footer = () => (
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            <h3>Need help?</h3>
-            <a href="tel://004542344599" id="phone">
-              +45 423 445 99
+            <h3>Cần giúp đỡ?</h3>
+            <a href="tel://0985007449" id="phone">
+              +84 985 007 449
             </a>
-            <a href="mailto:help@citytours.com" id="email_footer">
-              help@citytours.com
+            <a href="mailto:khoamilan123@gmail.com" id="email_footer">
+              khoamilan123@gmail.com.com
             </a>
           </div>
           <div className="col-md-3">
-            <h3>About</h3>
+            <h3>Liên kết hữu ích</h3>
             <ul>
               <li>
-                <Link to="/about">About us</Link>
+                <Link to="/about">Giới thiệu</Link>
+              </li>
+
+              <li>
+                <Link to="/sign-in">Đăng nhập</Link>
               </li>
               <li>
-                <Link to="/">FAQ</Link>
+                <Link to="/sign-up">Đăng kí</Link>
               </li>
               <li>
-                <Link to="/sign-in">Login</Link>
-              </li>
-              <li>
-                <Link to="/sign-up">Register</Link>
-              </li>
-              <li>
-                <Link to="/">Terms and condition</Link>
+                <Link to="/">Liên hệ</Link>
               </li>
             </ul>
           </div>

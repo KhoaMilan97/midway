@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import BannerHeader from "../../shared/banner-header.components";
 
 const About = () => (
   <React.Fragment>
     <BannerHeader
-      title="About Us"
+      title="Về chúng tôi"
       content="Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula."
     />
     <main>
@@ -13,12 +14,9 @@ const About = () => (
         <div className="container">
           <ul>
             <li>
-              <a href="/">Home</a>
+              <Link to="/">Trang chủ</Link>
             </li>
-            <li>
-              <a href="/">Category</a>
-            </li>
-            <li>Page active</li>
+            <li>Giới thiệu</li>
           </ul>
         </div>
       </div>

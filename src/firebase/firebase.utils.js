@@ -25,5 +25,6 @@ googleProvider.setCustomParameters({
 });
 
 facebookProvider.setCustomParameters({
-  prompt: "select_account"
+  prompt: "select_account",
+  display: "popup"
 });

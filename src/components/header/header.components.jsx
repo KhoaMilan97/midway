@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import { auth } from "../../firebase/firebase.utils";
 
 const Header = ({ currentUser }) => (
   <div>
@@ -18,17 +19,21 @@ const Header = ({ currentUser }) => (
               <ul id="top_links">
                 <li>
                   {currentUser ? (
-                    <span>Sign Out</span>
+                    <div>
+                      <span>{currentUser.displayName}</span>
+                      <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => auth.signOut()}
+                      >
+                        {" "}
+                        | Đăng xuất
+                      </span>
+                    </div>
                   ) : (
                     <Link to="/sign-in" id="access_link">
-                      Sign in
+                      Đăng nhập
                     </Link>
                   )}
-                </li>
-                <li>
-                  <a href="wishlist.html" id="wishlist_link">
-                    Wishlist
-                  </a>
                 </li>
               </ul>
             </div>
@@ -50,12 +55,12 @@ const Header = ({ currentUser }) => (
             </div>
           </div>
           <nav className="col-9">
-            <a
+            <Link
               className="cmn-toggle-switch cmn-toggle-switch__htx open_close"
-              href="/"
+              to="/"
             >
               <span>Menu mobile</span>
-            </a>
+            </Link>
             <div className="main-menu">
               <div id="header_menu">
                 <img
@@ -66,293 +71,102 @@ const Header = ({ currentUser }) => (
                   data-retina="true"
                 />
               </div>
-              <a href="/" className="open_close" id="close_in">
+              <Link to="/" className="open_close" id="close_in">
                 <i className="icon_set_1_icon-77" />
-              </a>
+              </Link>
               <ul>
                 <li className="submenu">
                   <Link to="/" className="show-submenu">
-                    Home
+                    Trang chủ
                   </Link>
                 </li>
                 <li className="submenu">
                   <Link to="/about" className="show-submenu">
-                    About
+                    Giới thiệu
                   </Link>
                 </li>
                 <li className="submenu">
-                  <a href="/" className="show-submenu">
+                  <Link to="/" className="show-submenu">
                     Tours <i className="icon-down-open-mini" />
-                  </a>
+                  </Link>
                   <ul>
                     <li>
-                      <a href="all_tours_list.html">All tours list</a>
+                      <Link to="/">Tour miền biển</Link>
                     </li>
                     <li>
-                      <a href="all_tours_grid.html">All tours grid</a>
-                    </li>
-                    <li>
-                      <a href="all_tours_grid_masonry.html">
-                        All tours Sort Masonry
-                      </a>
-                    </li>
-                    <li>
-                      <a href="all_tours_map_listing.html">
-                        All tours map listing
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_tour.html">Single tour page</a>
-                    </li>
-                    <li>
-                      <a href="single_tour_with_gallery.html">
-                        Single tour with gallery
-                      </a>
-                    </li>
-                    <li className="third-level">
-                      <a href="/">Single tour fixed sidebar</a>
-                      <ul>
-                        <li>
-                          <a href="single_tour_fixed_sidebar.html">
-                            Single tour fixed sidebar
-                          </a>
-                        </li>
-                        <li>
-                          <a href="single_tour_with_gallery_fixed_sidebar.html">
-                            Single tour 2 Fixed Sidebar
-                          </a>
-                        </li>
-                        <li>
-                          <a href="cart_fixed_sidebar.html">
-                            Cart Fixed Sidebar
-                          </a>
-                        </li>
-                        <li>
-                          <a href="payment_fixed_sidebar.html">
-                            Payment Fixed Sidebar
-                          </a>
-                        </li>
-                        <li>
-                          <a href="confirmation_fixed_sidebar.html">
-                            Confirmation Fixed Sidebar
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="single_tour_working_booking.php">
-                        Single tour working booking
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_tour_datepicker_v2.html">
-                        Date and time picker V2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="cart.html">Single tour cart</a>
-                    </li>
-                    <li>
-                      <a href="payment.html">Single tour booking</a>
+                      <Link to="/">Tour miền núi</Link>
                     </li>
                   </ul>
                 </li>
                 <li className="submenu">
-                  <a href="/" className="show-submenu">
-                    Hotels <i className="icon-down-open-mini" />
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="all_hotels_list.html">All hotels list</a>
-                    </li>
-                    <li>
-                      <a href="all_hotels_grid.html">All hotels grid</a>
-                    </li>
-                    <li>
-                      <a href="all_hotels_grid_masonry.html">
-                        All hotels Sort Masonry
-                      </a>
-                    </li>
-                    <li>
-                      <a href="all_hotels_map_listing.html">
-                        All hotels map listing
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_hotel.html">Single hotel page</a>
-                    </li>
-                    <li>
-                      <a href="single_hotel_datepicker_adv.html">
-                        Single hotel datepicker adv
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_hotel_datepicker_v2.html">
-                        Date and time picker V2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_hotel_working_booking.php">
-                        Single hotel working booking
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_hotel_contact.php">
-                        Single hotel contact working
-                      </a>
-                    </li>
-                    <li>
-                      <a href="cart_hotel.html">Cart hotel</a>
-                    </li>
-                    <li>
-                      <a href="payment_hotel.html">Booking hotel</a>
-                    </li>
-                    <li>
-                      <a href="confirmation_hotel.html">Confirmation hotel</a>
-                    </li>
-                  </ul>
+                  <Link to="/" className="show-submenu">
+                    Liên hệ
+                  </Link>
                 </li>
                 <li className="submenu">
-                  <a href="/" className="show-submenu">
-                    Transfers <i className="icon-down-open-mini" />
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="all_transfer_list.html">All transfers list</a>
-                    </li>
-                    <li>
-                      <a href="all_transfer_grid.html">All transfers grid</a>
-                    </li>
-                    <li>
-                      <a href="all_transfer_grid_masonry.html">
-                        All transfers Sort Masonry
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_transfer.html">Single transfer page</a>
-                    </li>
-                    <li>
-                      <a href="single_transfer_datepicker_v2.html">
-                        Date and time picker V2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="cart_transfer.html">Cart transfers</a>
-                    </li>
-                    <li>
-                      <a href="payment_transfer.html">Booking transfers</a>
-                    </li>
-                    <li>
-                      <a href="confirmation_transfer.html">
-                        Confirmation transfers
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="submenu">
-                  <a href="/" className="show-submenu">
-                    Restaurants <i className="icon-down-open-mini" />
-                  </a>
-                  <ul>
-                    <li>
-                      <a href="all_restaurants_list.html">
-                        All restaurants list
-                      </a>
-                    </li>
-                    <li>
-                      <a href="all_restaurants_grid.html">
-                        All restaurants grid
-                      </a>
-                    </li>
-                    <li>
-                      <a href="all_restaurants_grid_masonry.html">
-                        All restaurants Sort Masonry
-                      </a>
-                    </li>
-                    <li>
-                      <a href="all_restaurants_map_listing.html">
-                        All restaurants map listing
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_restaurant.html">
-                        Single restaurant page
-                      </a>
-                    </li>
-                    <li>
-                      <a href="single_restaurant_datepicker_v2.html">
-                        Date and time picker V2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="payment_restaurant.html">Booking restaurant</a>
-                    </li>
-                    <li>
-                      <a href="confirmation_restaurant.html">
-                        Confirmation transfers
-                      </a>
-                    </li>
-                  </ul>
+                  <Link to="/" className="show-submenu">
+                    Tin tức
+                  </Link>
                 </li>
               </ul>
             </div>
             {/* End main-menu */}
             <ul id="top_tools">
               <li>
-                <a href="/" className="search-overlay-menu-btn">
+                <Link to="/" className="search-overlay-menu-btn">
                   <i className="icon_search" />
-                </a>
+                </Link>
               </li>
               <li>
                 <div className="dropdown dropdown-cart">
-                  <a href="/" data-toggle="dropdown" className="cart_bt">
+                  <Link to="/" data-toggle="dropdown" className="cart_bt">
                     <i className="icon_bag_alt" />
                     <strong>3</strong>
-                  </a>
+                  </Link>
                   <ul className="dropdown-menu" id="cart_items">
                     <li>
                       <div className="image">
                         <img src="img/thumb_cart_1.jpg" alt="thumb_cart_1" />
                       </div>
                       <strong>
-                        <a href="/">Louvre museum</a>1x $36.00{" "}
+                        <Link to="/">Louvre museum</Link>1x $36.00{" "}
                       </strong>
-                      <a href="/" className="action">
+                      <Link to="/" className="action">
                         <i className="icon-trash" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <div className="image">
                         <img src="img/thumb_cart_2.jpg" alt="thumb_cart_2" />
                       </div>
                       <strong>
-                        <a href="/">Versailles tour</a>2x $36.00{" "}
+                        <Link to="/">Versailles tour</Link>2x $36.00{" "}
                       </strong>
-                      <a href="/" className="action">
+                      <Link to="/" className="action">
                         <i className="icon-trash" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <div className="image">
                         <img src="img/thumb_cart_3.jpg" alt="thumb_cart_3" />
                       </div>
                       <strong>
-                        <a href="/">Versailles tour</a>1x $36.00{" "}
+                        <Link to="/">Versailles tour</Link>1x $36.00{" "}
                       </strong>
-                      <a href="/" className="action">
+                      <Link to="/" className="action">
                         <i className="icon-trash" />
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <div>
                         Total: <span>$120.00</span>
                       </div>
-                      <a href="cart.html" className="button_drop">
+                      <Link to="cart.html" className="button_drop">
                         Go to cart
-                      </a>
-                      <a href="payment.html" className="button_drop outline">
+                      </Link>
+                      <Link to="payment.html" className="button_drop outline">
                         Check out
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

@@ -9,6 +9,7 @@ import {
 import { signInSuccess, signInFailure } from "./user.action";
 import userTypes from "./user.types";
 
+// Goole Login
 export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
@@ -16,7 +17,7 @@ export function* googleSignIn() {
 
     yield put(signInSuccess({ uid, displayName, email, photoURL }));
   } catch (err) {
-    yield put(signInFailure(err));
+    yield put(signInFailure(err.message));
   }
 }
 
@@ -31,13 +32,16 @@ export function* facebookSignin() {
     const { uid, displayName, email, photoURL } = user;
 
     yield put(signInSuccess({ uid, displayName, email, photoURL }));
-  } catch (err) {}
+  } catch (err) {
+    yield put(signInFailure(err.message));
+  }
 }
 
 export function* onFacebookLoginStart() {
   yield takeLatest(userTypes.FACEBOOK_SIGN_IN_START, facebookSignin);
 }
 
+// Call All sagas
 export function* userSaga() {
   yield all([call(onGoogleSignInStart), call(onFacebookLoginStart)]);
 }

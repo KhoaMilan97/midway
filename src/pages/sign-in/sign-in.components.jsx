@@ -9,30 +9,100 @@ import {
 
 import "./sign-in.styles.scss";
 
+function FormError(props) {
+  if (props.isHidden) {
+    return null;
+  } else {
+    return <div className="message">{props.errorMessage}</div>;
+  }
+}
+
+export const validateInput = (type, checkingText) => {
+  if (type === "email") {
+    const regexp = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+    const checkResult = regexp.test(checkingText);
+    if (checkResult) {
+      return {
+        isInputValid: true,
+        errorMessage: "",
+        isValid: true
+      };
+    } else {
+      return {
+        isInputValid: false,
+        errorMessage: "Email của bạn không đúng dạng",
+        isValid: false
+      };
+    }
+  }
+  if (type === "password") {
+    if (checkingText.length < 8) {
+      return {
+        isInputValid: false,
+        errorMessage: "Mật khẩu cần ít nhất 8 kí tự",
+        isValid: false
+      };
+    } else {
+      return {
+        isInputValid: true,
+        errorMessage: "",
+        isValid: true
+      };
+    }
+  }
+};
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: null,
-      password: null
+      email: {
+        value: "",
+        isInputValid: true,
+        errorMessage: "",
+        isValid: false
+      },
+      password: {
+        value: "",
+        isInputValid: true,
+        errorMessage: "",
+        isValid: false
+      }
     };
   }
 
+  handleInputValidation = event => {
+    const { name } = event.target;
+    const { isInputValid, errorMessage, isValid } = validateInput(
+      name,
+      this.state[name].value
+    );
+    const newState = { ...this.state[name] }; /* dummy object */
+    newState.isInputValid = isInputValid;
+    newState.errorMessage = errorMessage;
+    newState.isValid = isValid;
+    this.setState({ [name]: newState });
+  };
+
   handleChange = event => {
-    let { name } = event.target;
-    let { value } = event.target;
+    let { name, value } = event.target;
+    const newState = { ...this.state[name] };
+    newState.value = value;
     this.setState({
-      [name]: value
+      [name]: newState
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    alert("submitted");
+  handleSubmit = event => {
+    event.preventDefault();
+    if (this.state.email.isValid && this.state.password.isValid) {
+      alert("Success");
+    }
   };
   render() {
     const { googleSignInStart, facebookSignInStart } = this.props;
+    const { email, password } = this.state;
     return (
       <React.Fragment>
         <section id="hero" className="login">
@@ -67,15 +137,23 @@ class SignIn extends React.Component {
                       <span>Or</span>
                     </div>
                     <div className="form-group">
-                      <label>Username</label>
+                      <label>Email</label>
                       <input
                         type="text"
-                        name="username"
+                        name="email"
                         className=" form-control "
-                        placeholder="Username"
+                        placeholder="Email"
                         onChange={this.handleChange}
+                        value={email.value}
+                        onBlur={this.handleInputValidation}
+                      />
+                      <FormError
+                        type="email"
+                        isHidden={email.isInputValid}
+                        errorMessage={email.errorMessage}
                       />
                     </div>
+
                     <div className="form-group">
                       <label>Password</label>
                       <input
@@ -84,16 +162,25 @@ class SignIn extends React.Component {
                         className=" form-control"
                         placeholder="Password"
                         onChange={this.handleChange}
+                        value={password.value}
+                        onBlur={this.handleInputValidation}
+                      />
+                      <FormError
+                        type="password"
+                        isHidden={password.isInputValid}
+                        errorMessage={password.errorMessage}
                       />
                     </div>
-                    <p className="small">
-                      <a href="/">Forgot Password?</a>
-                    </p>
-                    <button type="submit" className="btn_full">
-                      Sign in
+
+                    <button
+                      type="submit"
+                      className="btn_full"
+                      disabled={!email.isValid && password.isValid}
+                    >
+                      Đăng nhập
                     </button>
                     <Link to="/sign-up" className="btn_full_outline">
-                      Register
+                      Đăng kí
                     </Link>
                   </form>
                 </div>

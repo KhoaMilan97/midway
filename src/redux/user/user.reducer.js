@@ -16,7 +16,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case userTypes.SIGN_IN_FAILURE:
       return {
         ...state,
-        error: null
+        error: action.payload
       };
     default:
       return state;
