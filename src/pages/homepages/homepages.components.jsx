@@ -76,7 +76,7 @@ const HomePages = () => (
       <div className="container margin_60">
         <div className="main_title">
           <h2>
-            Paris <span>Top</span> Tours
+            <span>Top</span> Tours
           </h2>
           <p>
             Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur

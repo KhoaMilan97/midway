@@ -29,7 +29,11 @@ class App extends React.Component {
             path="/sign-in"
             render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
           />
-          <Route exact path="/sign-up" component={SignUp} />
+          <Route
+            exact
+            path="/sign-up"
+            render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
+          />
           <Route exact path="/tours" component={TourPages} />
           <Route exact path="/" component={HomePages} />
           <Route path="*" component={NotFound} />

@@ -1,26 +1,32 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 
+import axios from "axios";
+
 import {
   auth,
   googleProvider,
-  facebookProvider
+  facebookProvider,
+  getCurrentUser
 } from "../../firebase/firebase.utils";
 
 import {
   signInSuccess,
   signInFailure,
   signOutSuccess,
-  signOutFailure
+  signOutFailure,
+  registerFailure,
+  registerSuccess
 } from "./user.action";
+
 import userTypes from "./user.types";
 
 // Goole Login
 export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    const { uid, displayName, email, photoURL } = user;
+    const { displayName, email } = user;
 
-    yield put(signInSuccess({ uid, displayName, email, photoURL }));
+    yield put(signInSuccess({ displayName, email }));
   } catch (err) {
     yield put(signInFailure(err.message));
   }
@@ -34,9 +40,9 @@ export function* onGoogleSignInStart() {
 export function* facebookSignin() {
   try {
     const { user } = yield auth.signInWithPopup(facebookProvider);
-    const { uid, displayName, email, photoURL } = user;
+    const { displayName, email } = user;
 
-    yield put(signInSuccess({ uid, displayName, email, photoURL }));
+    yield put(signInSuccess({ displayName, email }));
   } catch (err) {
     yield put(signInFailure(err.message));
   }
@@ -60,11 +66,78 @@ export function* onSignOutStart() {
   yield takeLatest(userTypes.SIGN_OUT_START, signOut);
 }
 
+/* Register account */
+export function* register({
+  payload: { email, password, displayName, phone }
+}) {
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    yield axios.post("http://localhost/midway/public/api/insert", {
+      id: user.uid,
+      email: email,
+      password: password,
+      fullname: displayName,
+      address: null,
+      phone: phone
+    });
+    yield auth.onAuthStateChanged(function(user) {
+      if (user) {
+        user.updateProfile({
+          displayName: displayName
+        });
+      }
+    });
+    yield put(
+      registerSuccess({ user: { email, password }, displayName, phone })
+    );
+  } catch (err) {
+    console.log(email, password);
+    yield put(registerFailure(err.message));
+  }
+}
+
+export function* onRegister() {
+  yield takeLatest(userTypes.REGISTER_EMAIL_START, register);
+}
+
+/* Login account */
+export function* signIn({ payload: { email, password } }) {
+  try {
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    const displayName = user.displayName;
+    yield put(signInSuccess({ displayName, email, password }));
+  } catch (err) {
+    yield put(signInFailure(err.message));
+  }
+}
+
+export function* onSignInWithEmail() {
+  yield takeLatest(userTypes.SIGN_IN_WITH_EMAIL, signIn);
+}
+
+/* SignInAfter SignUp */
+export function* signInAfterSignUp({
+  payload: {
+    user: { email, password }
+  }
+}) {
+  const { user } = yield auth.signInWithEmailAndPassword(email, password);
+  const displayName = user.displayName;
+  yield put(signInSuccess({ displayName, email, password }));
+}
+
+export function* onSignInaAfterSignUp() {
+  yield takeLatest(userTypes.REGISTER_EMAIL_SUCCESS, signInAfterSignUp);
+}
+
 // Call All sagas
 export function* userSaga() {
   yield all([
     call(onGoogleSignInStart),
     call(onFacebookLoginStart),
-    call(onSignOutStart)
+    call(onSignOutStart),
+    call(onRegister),
+    call(onSignInWithEmail),
+    call(onSignInaAfterSignUp)
   ]);
 }

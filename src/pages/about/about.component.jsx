@@ -7,7 +7,7 @@ const About = () => (
   <React.Fragment>
     <BannerHeader
       title="Về chúng tôi"
-      content="Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula."
+      content="Việt Nam nguyên chất 100% - Cảm nhận điều khác biệt"
     />
     <main>
       <div id="position">
@@ -24,11 +24,12 @@ const About = () => (
       <div className="container margin_60">
         <div className="main_title">
           <h2>
-            Some <span>good </span>reasons
+            Việt nam <span>MIDWAY </span> travel
           </h2>
+          <br />
           <p>
-            Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur
-            consequat.
+            Cung cấp dịch vụ du lịch chất lượng, tin cậy, cho phép khách hàng
+            đặt những chuyến đi hoàn hảo.
           </p>
         </div>
         <div className="row">

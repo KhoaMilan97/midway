@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+
+import { registerStart } from "../../redux/user/user.action";
 
 import {
   isPhone,
@@ -19,9 +22,9 @@ class SignUp extends React.Component {
     super(props);
     this.state = {
       email: "",
-      username: "",
+      displayName: "",
       password: "",
-      phoneNumber: "",
+      phone: "",
       confirmPassword: ""
     };
   }
@@ -29,10 +32,11 @@ class SignUp extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     this.form.validateAll();
-
+    const { registerStart } = this.props;
+    const { email, displayName, password, phone } = this.state;
     // check if no errors
     if (this.checkBtn.context._errors.length === 0) {
-      alert("success");
+      registerStart(email, password, displayName, phone);
     }
   }
 
@@ -71,8 +75,8 @@ class SignUp extends React.Component {
                         <Input
                           type="text"
                           className=" form-control"
-                          placeholder="Username"
-                          name="username"
+                          placeholder="Fullname"
+                          name="displayName"
                           onChange={this.onChangeHandler}
                           validations={[
                             required,
@@ -100,7 +104,7 @@ class SignUp extends React.Component {
                           className=" form-control"
                           id="phone"
                           placeholder="Phone number"
-                          name="phoneNumber"
+                          name="phone"
                           onChange={this.onChangeHandler}
                           validations={[required, isPhone]}
                         />
@@ -150,4 +154,9 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapDisptachToProps = dispatch => ({
+  registerStart: (email, password, displayName, phone) =>
+    dispatch(registerStart({ email, password, displayName, phone }))
+});
+
+export default connect(null, mapDisptachToProps)(SignUp);

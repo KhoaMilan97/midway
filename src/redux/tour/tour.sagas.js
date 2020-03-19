@@ -6,7 +6,9 @@ import { getTourSuccess, getTourFailure } from "./tour.action";
 
 export function* getTours() {
   try {
-    const tours = yield axios.get("http://localhost/midway/public/api/tour");
+    const tours = yield axios.get(
+      `http://localhost/midway/public/api/tour/hot/1`
+    );
     yield put(getTourSuccess(tours.data));
   } catch (error) {
     yield put(getTourFailure(error.message));

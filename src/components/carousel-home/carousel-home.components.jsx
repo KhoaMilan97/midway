@@ -8,7 +8,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 const CarouselHome = () => {
   const [slider] = useState([
     {
-      image: "slide_home_3.jpg",
+      image: "slide_home_6.jpg",
       title: "Going Inside",
       titlebreak: "The Louvre Museum",
       description:
@@ -17,7 +17,7 @@ const CarouselHome = () => {
       position: "text-center"
     },
     {
-      image: "slide_home_2.jpg",
+      image: "slide_home_5.jpg",
       title: "Discover",
       titlebreak: "Vatican Museum",
       description:
@@ -26,7 +26,7 @@ const CarouselHome = () => {
       position: "text-right"
     },
     {
-      image: "slide_home_1.jpg",
+      image: "slide_image_7.jpg",
       title: "Love Paris",
       titlebreak: "Arch de Triomphe",
       description:

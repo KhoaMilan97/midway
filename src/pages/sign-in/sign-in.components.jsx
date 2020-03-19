@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 import {
   googleSignInStart,
-  facebookSignInStart
+  facebookSignInStart,
+  signInWithEmail
 } from "../../redux/user/user.action";
 
 import "./sign-in.styles.scss";
@@ -96,9 +97,9 @@ class SignIn extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.email.isValid && this.state.password.isValid) {
-      alert("Success");
-    }
+    const { email, password } = this.state;
+
+    this.props.signInWithEmail(email.value, password.value);
   };
   render() {
     const { googleSignInStart, facebookSignInStart } = this.props;
@@ -172,11 +173,7 @@ class SignIn extends React.Component {
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      className="btn_full"
-                      disabled={!email.isValid && password.isValid}
-                    >
+                    <button type="submit" className="btn_full">
                       Đăng nhập
                     </button>
                     <Link to="/sign-up" className="btn_full_outline">
@@ -195,7 +192,9 @@ class SignIn extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  facebookSignInStart: () => dispatch(facebookSignInStart())
+  facebookSignInStart: () => dispatch(facebookSignInStart()),
+  signInWithEmail: (email, password) =>
+    dispatch(signInWithEmail({ email, password }))
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);

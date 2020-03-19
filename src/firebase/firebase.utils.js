@@ -28,3 +28,12 @@ facebookProvider.setCustomParameters({
   prompt: "select_account",
   display: "popup"
 });
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
