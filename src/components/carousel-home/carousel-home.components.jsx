@@ -6,7 +6,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 
 const CarouselHome = () => {
-  const [slider, setSlider] = useState([
+  const [slider] = useState([
     {
       image: "slide_home_3.jpg",
       title: "Going Inside",

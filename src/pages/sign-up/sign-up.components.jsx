@@ -12,7 +12,7 @@ import {
   minLengthPassword,
   minLengthUsername,
   onlyString
-} from "../../components/util/checkValidate.components";
+} from "../../util/checkValidate.components";
 
 class SignUp extends React.Component {
   constructor(props) {

@@ -6,7 +6,12 @@ import {
   facebookProvider
 } from "../../firebase/firebase.utils";
 
-import { signInSuccess, signInFailure } from "./user.action";
+import {
+  signInSuccess,
+  signInFailure,
+  signOutSuccess,
+  signOutFailure
+} from "./user.action";
 import userTypes from "./user.types";
 
 // Goole Login
@@ -41,7 +46,25 @@ export function* onFacebookLoginStart() {
   yield takeLatest(userTypes.FACEBOOK_SIGN_IN_START, facebookSignin);
 }
 
+// SIGN OUT
+export function* signOut() {
+  try {
+    yield auth.signOut();
+    yield put(signOutSuccess());
+  } catch (err) {
+    yield put(signOutFailure(err.message));
+  }
+}
+
+export function* onSignOutStart() {
+  yield takeLatest(userTypes.SIGN_OUT_START, signOut);
+}
+
 // Call All sagas
 export function* userSaga() {
-  yield all([call(onGoogleSignInStart), call(onFacebookLoginStart)]);
+  yield all([
+    call(onGoogleSignInStart),
+    call(onFacebookLoginStart),
+    call(onSignOutStart)
+  ]);
 }

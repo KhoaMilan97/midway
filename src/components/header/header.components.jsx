@@ -1,9 +1,10 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase/firebase.utils";
 
-const Header = ({ currentUser }) => (
+import { signOutStart } from "../../redux/user/user.action";
+
+const Header = ({ currentUser, signOutStart }) => (
   <div>
     <div className="layer" />
 
@@ -23,7 +24,7 @@ const Header = ({ currentUser }) => (
                       <span>{currentUser.displayName}</span>
                       <span
                         style={{ cursor: "pointer" }}
-                        onClick={() => auth.signOut()}
+                        onClick={signOutStart}
                       >
                         {" "}
                         | Đăng xuất
@@ -86,7 +87,7 @@ const Header = ({ currentUser }) => (
                   </Link>
                 </li>
                 <li className="submenu">
-                  <Link to="/" className="show-submenu">
+                  <Link to="/tours" className="show-submenu">
                     Tours <i className="icon-down-open-mini" />
                   </Link>
                   <ul>
@@ -182,4 +183,8 @@ const Header = ({ currentUser }) => (
   </div>
 );
 
-export default Header;
+const mapDispachToProps = dispatch => ({
+  signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(null, mapDispachToProps)(Header);
