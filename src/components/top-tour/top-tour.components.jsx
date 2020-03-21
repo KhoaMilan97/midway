@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import OwlCarousel from "react-owl-carousel";
-import { getTourStart } from "../../redux/tour/tour.action";
+
 import { selectHotTours } from "../../redux/tour/tour.selector";
 
 import "owl.carousel/dist/assets/owl.carousel.css";
@@ -39,11 +39,6 @@ const setting = {
 };
 
 class TopTour extends React.Component {
-  componentDidMount() {
-    const { getTourStart } = this.props;
-    getTourStart();
-  }
-
   render() {
     const { tours } = this.props;
     return (
@@ -115,8 +110,4 @@ const mapStateToProps = createStructuredSelector({
   tours: selectHotTours
 });
 
-const mapDispatchToProps = dispatch => ({
-  getTourStart: () => dispatch(getTourStart())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TopTour);
+export default connect(mapStateToProps)(TopTour);

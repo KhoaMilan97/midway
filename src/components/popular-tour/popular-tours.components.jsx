@@ -49,7 +49,7 @@ const PopularTours = ({ popularTours }) => (
             <div className="item" key={tour.id_tour}>
               <div className="hotel_container">
                 <div className="ribbon_3 popular">
-                  <span>Hot</span>
+                  <span>Popular</span>
                 </div>
                 <div className="img_container">
                   <a href="single_hotel.html">

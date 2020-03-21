@@ -1,10 +1,43 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { Link } from "react-router-dom";
+
+import { selectAllTours } from "../../redux/tour/tour.selector";
+import { getTourStart } from "../../redux/tour/tour.action";
 
 import BannerHeader from "../../shared/banner-header.components";
 import TourItems from "../../components/tour-items/tour-items.components";
+import Pagination from "react-js-pagination";
+
+import "./tours.styles.scss";
 
 class TourPages extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1,
+      toursPerPages: 5
+    };
+  }
+
+  componentDidMount() {
+    const { getTourStart } = this.props;
+    getTourStart();
+  }
+
+  handlePageChange(pageNumber) {
+    this.setState({ currentPage: pageNumber });
+  }
+
   render() {
+    const { tours } = this.props;
+    const { currentPage, toursPerPages } = this.state;
+    // Get Current Tours
+    const indexOfLastTours = currentPage * toursPerPages; // 1 * 5 = 5 //
+    const indexOfFirstTours = indexOfLastTours - toursPerPages; // 5 - 5 = 0 //
+    const currentTours = tours.slice(indexOfFirstTours, indexOfLastTours); // (0,5)
+
     return (
       <React.Fragment>
         <BannerHeader
@@ -16,7 +49,7 @@ class TourPages extends React.Component {
             <div className="container">
               <ul>
                 <li>
-                  <a href="/">Home</a>
+                  <Link to="/">Trang chủ</Link>
                 </li>
                 <li>Tours</li>
               </ul>
@@ -29,10 +62,10 @@ class TourPages extends React.Component {
                 <div className="box_style_cat">
                   <ul id="cat_nav">
                     <li>
-                      <a href="/" id="active">
+                      <Link to="/" id="active">
                         <i className="icon_set_1_icon-51" />
-                        All tours <span>(141)</span>
-                      </a>
+                        All tours <span>({tours.length})</span>
+                      </Link>
                     </li>
                     <li>
                       <a href="/">
@@ -92,43 +125,21 @@ class TourPages extends React.Component {
               </aside>
               {/*End aside */}
               <div className="col-lg-9">
-                <TourItems />
-                <TourItems />
-                <TourItems />
-                <TourItems />
-                <TourItems />
+                {currentTours.map(tour => (
+                  <TourItems key={tour.id_tour} {...tour} />
+                ))}
+
                 <hr />
-                <nav aria-label="Page navigation">
-                  <ul className="pagination justify-content-center">
-                    <li className="page-item">
-                      <a className="page-link" href="/" aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                        <span className="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li className="page-item active">
-                      <span className="page-link">
-                        1<span className="sr-only">(current)</span>
-                      </span>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="/">
-                        2
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="/">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="/" aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                        <span className="sr-only">Next</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                <Pagination
+                  activePage={currentPage}
+                  itemsCountPerPage={toursPerPages}
+                  totalItemsCount={tours.length}
+                  pageRangeDisplayed={toursPerPages}
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  onChange={this.handlePageChange.bind(this)}
+                  innerClass="pagination justify-content-center"
+                />
                 {/* end pagination*/}
               </div>
               {/* End col lg-9 */}
@@ -142,4 +153,12 @@ class TourPages extends React.Component {
   }
 }
 
-export default TourPages;
+const mapStateToProps = createStructuredSelector({
+  tours: selectAllTours
+});
+
+const mapDispatchToProps = dispatch => ({
+  getTourStart: () => dispatch(getTourStart())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TourPages);
