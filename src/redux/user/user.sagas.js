@@ -5,8 +5,7 @@ import axios from "axios";
 import {
   auth,
   googleProvider,
-  facebookProvider,
-  getCurrentUser
+  facebookProvider
 } from "../../firebase/firebase.utils";
 
 import {

@@ -2,7 +2,7 @@ import React from "react";
 
 import Carousel from "../../components/carousel-home/carousel-home.components";
 import TopTours from "../../components/top-tour/top-tour.components";
-import TopHotels from "../../components/top-hotels/top-hotels.components";
+import PopularTours from "../../components/popular-tour/popular-tours.components";
 
 const HomePages = () => (
   <div>
@@ -92,14 +92,14 @@ const HomePages = () => (
         <hr className="mt-5 mb-5" />
         <div className="main_title">
           <h2>
-            Paris <span>Top</span> Hotels
+            <span>Tours</span> phổ biến
           </h2>
           <p>
             Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur
             consequat.
           </p>
         </div>
-        <TopHotels />
+        <PopularTours />
         <p className="text-center nopadding">
           <a href="all_hotels_list.html" className="btn_1">
             View all Hotels
