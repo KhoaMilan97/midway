@@ -1,7 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-const TourItems = ({ tour_name, tour_price, description, hot, id_tour }) => (
+const TourItems = ({
+  tour_name,
+  tour_price,
+  description,
+  hot,
+  id_tour,
+  image
+}) => (
   <div className="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
     <div className="row">
       <div className="col-lg-4 col-md-4">
@@ -17,13 +24,13 @@ const TourItems = ({ tour_name, tour_price, description, hot, id_tour }) => (
           </a>
         </div>
         <div className="img_list">
-          <a href="single_tour.html">
-            <img src="img/tour_box_1.jpg" alt="tours" />
+          <Link to={`/tours/${id_tour}`}>
+            <img src={`img/tour/${image}`} alt="tours" />
             <div className="short_info">
               <i className="icon_set_1_icon-4" />
               Museums{" "}
             </div>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="col-lg-6 col-md-6">
@@ -65,4 +72,4 @@ const TourItems = ({ tour_name, tour_price, description, hot, id_tour }) => (
   </div>
 );
 
-export default TourItems;
+export default withRouter(TourItems);

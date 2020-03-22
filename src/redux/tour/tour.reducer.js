@@ -2,7 +2,8 @@ import tourTypes from "./tours.type";
 
 const INITIAL_STATE = {
   tours: [],
-  erros: null
+  erros: null,
+  loading: true
 };
 
 const tourReducer = (state = INITIAL_STATE, action) => {
@@ -11,12 +12,14 @@ const tourReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         tours: action.payload,
-        erros: null
+        erros: null,
+        loading: false
       };
     case tourTypes.GET_TOURS_FAILURE:
       return {
         ...state,
-        erros: action.payload
+        erros: action.payload,
+        loading: false
       };
 
     default:

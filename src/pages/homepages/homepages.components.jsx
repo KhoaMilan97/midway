@@ -1,10 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
 import Carousel from "../../components/carousel-home/carousel-home.components";
 import TopTours from "../../components/top-tour/top-tour.components";
 import PopularTours from "../../components/popular-tour/popular-tours.components";
+import WithSpinner from "../../components/with-spinner/with-spinner.components";
+
 import { getTourStart } from "../../redux/tour/tour.action";
+import { selectTourLoading } from "../../redux/tour/tour.selector";
+
+const TopToursContainer = WithSpinner(TopTours);
+const PopularToursContainer = WithSpinner(PopularTours);
 
 class HomePages extends React.Component {
   componentDidMount() {
@@ -12,6 +19,7 @@ class HomePages extends React.Component {
     getTourStart();
   }
   render() {
+    const { loading } = this.props;
     return (
       <div>
         <main>
@@ -91,7 +99,7 @@ class HomePages extends React.Component {
                 Curabitur consequat.
               </p>
             </div>
-            <TopTours />
+            <TopToursContainer isLoading={loading} />
             <p className="text-center add_bottom_30">
               <a href="all_tours_list.html" className="btn_1">
                 View all Tours
@@ -107,7 +115,7 @@ class HomePages extends React.Component {
                 Curabitur consequat.
               </p>
             </div>
-            <PopularTours />
+            <PopularToursContainer isLoading={loading} />
             <p className="text-center nopadding">
               <a href="all_hotels_list.html" className="btn_1">
                 View all Hotels
@@ -303,8 +311,12 @@ class HomePages extends React.Component {
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+  loading: selectTourLoading
+});
+
 const mapDispatchToProps = dispatch => ({
   getTourStart: () => dispatch(getTourStart())
 });
 
-export default connect(null, mapDispatchToProps)(HomePages);
+export default connect(mapStateToProps, mapDispatchToProps)(HomePages);

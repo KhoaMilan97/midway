@@ -13,6 +13,8 @@ import SignIn from "./pages/sign-in/sign-in.components";
 import SignUp from "./pages/sign-up/sign-up.components";
 import NotFound from "./pages/404-pages/404-pages.components";
 import TourPages from "./pages/tours/tours.components";
+import Cart from "./pages/cart/cart.components";
+import Confirmation from "./pages/confirmation/confirmation.components";
 
 import "./App.css";
 
@@ -34,7 +36,15 @@ class App extends React.Component {
             path="/sign-up"
             render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
           />
-          <Route exact path="/tours" component={TourPages} />
+          <Route
+            exact
+            path="/cart"
+            render={() =>
+              !currentUser ? <Redirect to="/sign-in" /> : <Cart />
+            }
+          />
+          <Route path="/tours" component={TourPages} />
+          <Route path="/confirm" component={Confirmation} />
           <Route exact path="/" component={HomePages} />
           <Route path="*" component={NotFound} />
         </Switch>

@@ -5,14 +5,11 @@ import "./with-spinner.styles.scss";
 const WithSpinner = WrappedCompoents => {
   const Spinner = ({ isLoading, ...otherProps }) => {
     return isLoading ? (
-      <div className="cs-loader">
-        <div className="cs-loader-inner">
-          <label>●</label>
-          <label>●</label>
-          <label>●</label>
-          <label>●</label>
-          <label>●</label>
-          <label>●</label>
+      <div className="spinner">
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
       </div>
     ) : (

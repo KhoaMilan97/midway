@@ -92,10 +92,13 @@ const Header = ({ currentUser, signOutStart }) => (
                   </Link>
                   <ul>
                     <li>
-                      <Link to="/">Tour miền biển</Link>
+                      <Link to="/">Tour miền bắc</Link>
                     </li>
                     <li>
-                      <Link to="/">Tour miền núi</Link>
+                      <Link to="/">Tour miền trung</Link>
+                    </li>
+                    <li>
+                      <Link to="/">Tour miền nam</Link>
                     </li>
                   </ul>
                 </li>
