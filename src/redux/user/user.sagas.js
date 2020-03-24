@@ -1,6 +1,6 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 
-import axios from "axios";
+import API from "../../api/baseURL";
 
 import {
   auth,
@@ -23,6 +23,7 @@ import userTypes from "./user.types";
 export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
+    console.log(user);
     const { displayName, email } = user;
 
     yield put(signInSuccess({ displayName, email }));
@@ -39,6 +40,7 @@ export function* onGoogleSignInStart() {
 export function* facebookSignin() {
   try {
     const { user } = yield auth.signInWithPopup(facebookProvider);
+
     const { displayName, email } = user;
 
     yield put(signInSuccess({ displayName, email }));
@@ -71,7 +73,7 @@ export function* register({
 }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield axios.post("http://localhost/midway/public/api/insert", {
+    yield API.post("insert", {
       id: user.uid,
       email: email,
       password: password,

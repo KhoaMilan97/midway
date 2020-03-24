@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import API from "../../api/baseURL";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -14,7 +15,7 @@ import {
   rePassowrd,
   minLengthPassword,
   minLengthUsername,
-  onlyString
+  emailExist
 } from "../../util/checkValidate.components";
 
 class SignUp extends React.Component {
@@ -25,8 +26,13 @@ class SignUp extends React.Component {
       displayName: "",
       password: "",
       phone: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      user: ""
     };
+  }
+
+  componentDidMount() {
+    API.get("user").then(res => this.setState({ user: res.data }));
   }
 
   onSubmit(e) {
@@ -48,6 +54,7 @@ class SignUp extends React.Component {
   };
 
   render() {
+    const { user } = this.state;
     return (
       <React.Fragment>
         <main>
@@ -78,11 +85,7 @@ class SignUp extends React.Component {
                           placeholder="Fullname"
                           name="displayName"
                           onChange={this.onChangeHandler}
-                          validations={[
-                            required,
-                            minLengthUsername,
-                            onlyString
-                          ]}
+                          validations={[required, minLengthUsername]}
                         />
                       </div>
                       <div className="form-group">
@@ -93,7 +96,8 @@ class SignUp extends React.Component {
                           placeholder="Email"
                           name="email"
                           onChange={this.onChangeHandler}
-                          validations={[required, email]}
+                          user={user}
+                          validations={[required, email, emailExist]}
                         />
                       </div>
 

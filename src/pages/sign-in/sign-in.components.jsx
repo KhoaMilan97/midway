@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import API from "../../api/baseURL";
 
 import {
   googleSignInStart,
@@ -69,8 +70,14 @@ class SignIn extends React.Component {
         isInputValid: true,
         errorMessage: "",
         isValid: false
-      }
+      },
+      user: "",
+      message: ""
     };
+  }
+
+  componentDidMount() {
+    API.get("user").then(res => this.setState({ user: res.data }));
   }
 
   handleInputValidation = event => {
@@ -97,13 +104,24 @@ class SignIn extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, user } = this.state;
+    const { signInWithEmail } = this.props;
 
-    this.props.signInWithEmail(email.value, password.value);
+    user.map(item => {
+      if (item.email === email.value && item.password === password.value) {
+        signInWithEmail(email.value, password.value);
+      } else {
+        this.setState({ message: "Tài khoản / Mật khẩu không chính xác" });
+        setTimeout(() => {
+          this.setState({ message: "" });
+        }, 3000);
+      }
+      return item;
+    });
   };
   render() {
     const { googleSignInStart, facebookSignInStart } = this.props;
-    const { email, password } = this.state;
+    const { email, password, message } = this.state;
     return (
       <React.Fragment>
         <section id="hero" className="login">
@@ -137,6 +155,9 @@ class SignIn extends React.Component {
                     <div className="divider">
                       <span>Or</span>
                     </div>
+                    {message.length > 0 ? (
+                      <div className="alert alert-danger">{message}</div>
+                    ) : null}
                     <div className="form-group">
                       <label>Email</label>
                       <input

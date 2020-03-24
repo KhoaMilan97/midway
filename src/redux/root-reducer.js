@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage/session";
 
 import userReducer from "./user/user.reducer";
 import tourReducer from "./tour/tour.reducer";
+import typeReducer from "./type-tour/type-tour.reducer";
 
 const persistConfig = {
   key: "root",
@@ -13,7 +14,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
-  tour: tourReducer
+  tour: tourReducer,
+  type: typeReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

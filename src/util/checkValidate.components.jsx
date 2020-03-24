@@ -1,5 +1,5 @@
 import React from "react";
-import { isEmail, isEmpty, isMobilePhone, isAlpha } from "validator";
+import { isEmail, isEmpty, isMobilePhone } from "validator";
 
 export const required = value => {
   if (isEmpty(value)) {
@@ -31,14 +31,16 @@ export const isPhone = value => {
   }
 };
 
-export const onlyString = value => {
-  if (!isAlpha(value)) {
-    return <div className="message">Tên người dùng chỉ bao gồm chữ</div>;
-  }
-};
-
 export const rePassowrd = (value, props) => {
   if (value !== props.repass) {
     return <div className="message">Mật khẩu của bạn không trùng khớp</div>;
   }
 };
+
+export function emailExist(value, props) {
+  for (let i = 0; i < props.user.length; i++) {
+    if (value === props.user[i].email) {
+      return <div className="message">Email này đã được sử dụng</div>;
+    }
+  }
+}
