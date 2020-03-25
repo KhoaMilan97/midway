@@ -8,7 +8,7 @@ const BannerHeader = ({ title, content }) => (
     data-natural-width={1400}
     data-natural-height={470}
     style={{
-      backgroundImage: `url(img/header_bg.jpg)`,
+      backgroundImage: `url(/img/header_bg.jpg)`,
       width: "100%",
       height: "470",
       backgroundPosition: "center center",

@@ -15,17 +15,9 @@ const TourItems = ({
         <div className="ribbon_3 popular">
           <span>{hot === 1 ? "Hot" : "Popular"}</span>
         </div>
-        <div className="wishlist">
-          <a className="tooltip_flip tooltip-effect-1" href="/">
-            +
-            <span className="tooltip-content-flip">
-              <span className="tooltip-back">Add to wishlist</span>
-            </span>
-          </a>
-        </div>
         <div className="img_list">
           <Link to={`/tours/${id_tour}`}>
-            <img src={`img/tour/${image}`} alt="tours" />
+            <img src={`/img/tour/${image}`} alt="tours" />
             <div className="short_info">
               <i className="icon_set_1_icon-4" />
               Museums{" "}
@@ -35,14 +27,6 @@ const TourItems = ({
       </div>
       <div className="col-lg-6 col-md-6">
         <div className="tour_list_desc">
-          <div className="rating">
-            <i className="icon-smile voted" />
-            <i className="icon-smile  voted" />
-            <i className="icon-smile  voted" />
-            <i className="icon-smile  voted" />
-            <i className="icon-smile" />
-            <small>(75)</small>
-          </div>
           <h3>
             <strong>{tour_name}</strong>
           </h3>
@@ -59,10 +43,10 @@ const TourItems = ({
               })}
             </sup>
             {/* <span className="normal_price_list">$99</span> */}
-            <small>*Per person</small>
+            <small>*Trên người</small>
             <p>
-              <Link to={`tours/${id_tour}`} className="btn_1">
-                Details
+              <Link to={`/tours/${id_tour}`} className="btn_1">
+                Chi tiết
               </Link>
             </p>
           </div>

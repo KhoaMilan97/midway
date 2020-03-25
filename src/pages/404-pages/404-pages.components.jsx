@@ -10,12 +10,9 @@ const NotFound = () => (
       <Link to="/" className="animated fadeInUp button_intro">
         Back to home
       </Link>{" "}
-      <a
-        href="all_tours_list.html"
-        className="animated fadeInUp button_intro outline"
-      >
+      <Link to="/tours" className="animated fadeInUp button_intro outline">
         View all tours
-      </a>
+      </Link>
     </div>
   </section>
 );

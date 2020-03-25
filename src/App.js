@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -7,16 +7,20 @@ import { selectCurrentUser } from "./redux/user/user.selector";
 
 import Header from "./components/header/header.components";
 import Footer from "./components/footer/footer.components";
-import HomePages from "./pages/homepages/homepages.components";
-import About from "./pages/about/about.component";
-import SignIn from "./pages/sign-in/sign-in.components";
-import SignUp from "./pages/sign-up/sign-up.components";
-import NotFound from "./pages/404-pages/404-pages.components";
-import TourPages from "./pages/tours/tours.components";
-import Cart from "./pages/cart/cart.components";
-import Confirmation from "./pages/confirmation/confirmation.components";
+import Spinner from "./components/spinner/spinner.components";
 
 import "./App.css";
+
+const HomePages = lazy(() => import("./pages/homepages/homepages.components"));
+const About = lazy(() => import("./pages/about/about.component"));
+const SignIn = lazy(() => import("./pages/sign-in/sign-in.components"));
+const SignUp = lazy(() => import("./pages/sign-up/sign-up.components"));
+const NotFound = lazy(() => import("./pages/404-pages/404-pages.components"));
+const TourPages = lazy(() => import("./pages/tours/tours.components"));
+const Cart = lazy(() => import("./pages/cart/cart.components"));
+const Confirmation = lazy(() =>
+  import("./pages/confirmation/confirmation.components")
+);
 
 class App extends React.Component {
   render() {
@@ -24,30 +28,32 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header currentUser={currentUser} />
-        <Switch>
-          <Route exact path="/about" component={About} />
-          <Route
-            exact
-            path="/sign-in"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
-          />
-          <Route
-            exact
-            path="/sign-up"
-            render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
-          />
-          <Route
-            exact
-            path="/cart"
-            render={() =>
-              !currentUser ? <Redirect to="/sign-in" /> : <Cart />
-            }
-          />
-          <Route path="/tours" component={TourPages} />
-          <Route path="/confirm" component={Confirmation} />
-          <Route exact path="/" component={HomePages} />
-          <Route path="*" component={NotFound} />
-        </Switch>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route exact path="/about" component={About} />
+            <Route
+              exact
+              path="/sign-in"
+              render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+            />
+            <Route
+              exact
+              path="/sign-up"
+              render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
+            />
+            <Route
+              exact
+              path="/cart"
+              render={() =>
+                !currentUser ? <Redirect to="/sign-in" /> : <Cart />
+              }
+            />
+            <Route path="/tours" component={TourPages} />
+            <Route exact path="/confirm" component={Confirmation} />
+            <Route exact path="/" component={HomePages} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </Suspense>
         <Footer />
       </div>
     );

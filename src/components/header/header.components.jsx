@@ -104,7 +104,9 @@ class Header extends React.Component {
                       <ul>
                         {types.map(type => (
                           <li key={type.id}>
-                            <Link to={`/tour`}>{type.name_type}</Link>
+                            <Link to={`/tours/${type.type_link}/${type.id}`}>
+                              {type.name_type}
+                            </Link>
                           </li>
                         ))}
                       </ul>

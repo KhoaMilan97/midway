@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
 import DatePicker from "react-datepicker";
 
 import { selectTourDetails } from "../../redux/tour/tour.selector";
@@ -30,6 +30,7 @@ class TourDetails extends React.Component {
 
   render() {
     const { toursDetails } = this.props;
+    if (!toursDetails) return <Redirect to="/tours" />;
     return (
       <React.Fragment>
         <section

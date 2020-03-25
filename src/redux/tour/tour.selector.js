@@ -24,3 +24,11 @@ export const selectTourDetails = createSelector(
   [getUrlParams],
   toursDetails => toursDetails
 );
+
+export const getTypeTours = (state, props) =>
+  state.tour.tours.filter(tour => tour.id_type_tour === parseInt(props));
+
+export const selectTourWithType = createSelector(
+  [getTypeTours],
+  toursWithTypes => toursWithTypes
+);

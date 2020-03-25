@@ -1,16 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { Link } from "react-router-dom";
+// import { createStructuredSelector } from "reselect";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import Pagination from "react-js-pagination";
-
-import { selectAllTours } from "../../redux/tour/tour.selector";
-import { selectAllType } from "../../redux/type-tour/type-tour.selector";
 
 import BannerHeader from "../../shared/banner-header.components";
 import TourItems from "../../components/tour-items/tour-items.components";
 
-class AllTours extends React.Component {
+import { selectAllType } from "../../redux/type-tour/type-tour.selector";
+import { selectTourWithType } from "../../redux/tour/tour.selector";
+
+class TypeTours extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,17 +25,22 @@ class AllTours extends React.Component {
   }
 
   render() {
-    const { tours, typeTours } = this.props;
+    const { typeTours, match, toursWithType } = this.props;
     const { currentPage, toursPerPages } = this.state;
     // Get Current Tours
     const indexOfLastTours = currentPage * toursPerPages; // 1 * 5 = 5 //
     const indexOfFirstTours = indexOfLastTours - toursPerPages; // 5 - 5 = 0 //
-    const currentTours = tours.slice(indexOfFirstTours, indexOfLastTours); // (0,5)
+    const currentTours = toursWithType.slice(
+      indexOfFirstTours,
+      indexOfLastTours
+    ); // (0,5)
+
+    if (toursWithType.length === 0) return <Redirect to="/tours" />;
 
     return (
       <React.Fragment>
         <BannerHeader
-          title="All tours"
+          title={`${match.params.type}`}
           content="Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula."
         />
         <main>
@@ -45,7 +50,10 @@ class AllTours extends React.Component {
                 <li>
                   <Link to="/">Trang chủ</Link>
                 </li>
-                <li>Tours</li>
+                <li>
+                  <Link to="/tours">Tour</Link>
+                </li>
+                <li>{match.params.type}</li>
               </ul>
             </div>
           </div>
@@ -63,7 +71,10 @@ class AllTours extends React.Component {
                     </li>
                     {typeTours.map(item => (
                       <li key={item.id}>
-                        <Link to={`/tours/${item.type_link}/${item.id}`}>
+                        <Link
+                          to={`/tours/${item.type_link}/${item.id}`}
+                          onClick={() => this.setState({ currentPage: 1 })}
+                        >
                           <i className="icon_set_1_icon-51" />
                           {item.name_type}
                         </Link>
@@ -75,10 +86,10 @@ class AllTours extends React.Component {
                 <div className="box_style_2">
                   <i className="icon_set_1_icon-57" />
                   <h4>
-                    Need <span>Help?</span>
+                    Cần <span>giúp đỡ?</span>
                   </h4>
                   <a href="tel://004542344599" className="phone">
-                    +45 423 445 99
+                    +84 985 007449
                   </a>
                   <small>Monday to Friday 9.00am - 7.30pm</small>
                 </div>
@@ -93,7 +104,7 @@ class AllTours extends React.Component {
                 <Pagination
                   activePage={currentPage}
                   itemsCountPerPage={toursPerPages}
-                  totalItemsCount={tours.length}
+                  totalItemsCount={toursWithType.length}
                   pageRangeDisplayed={toursPerPages}
                   itemClass="page-item"
                   linkClass="page-link"
@@ -113,9 +124,9 @@ class AllTours extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  tours: selectAllTours,
-  typeTours: selectAllType
+const mapStateToProps = (state, ownProps) => ({
+  typeTours: selectAllType(state),
+  toursWithType: selectTourWithType(state, ownProps.match.params.id)
 });
 
-export default connect(mapStateToProps)(AllTours);
+export default withRouter(connect(mapStateToProps)(TypeTours));
