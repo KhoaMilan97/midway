@@ -100,6 +100,7 @@ class HomePages extends React.Component {
               </p>
             </div>
             <TopToursContainer isLoading={loading} />
+
             <p className="text-center add_bottom_30">
               <a href="all_tours_list.html" className="btn_1">
                 View all Tours

@@ -151,7 +151,7 @@ class Header extends React.Component {
                             <i className="icon-trash" />
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <div className="image">
                             <img
                               src="img/thumb_cart_2.jpg"
@@ -164,8 +164,8 @@ class Header extends React.Component {
                           <Link to="/" className="action">
                             <i className="icon-trash" />
                           </Link>
-                        </li>
-                        <li>
+                        </li> */}
+                        {/* <li>
                           <div className="image">
                             <img
                               src="img/thumb_cart_3.jpg"
@@ -178,12 +178,12 @@ class Header extends React.Component {
                           <Link to="/" className="action">
                             <i className="icon-trash" />
                           </Link>
-                        </li>
+                        </li> */}
                         <li>
                           <div>
                             Total: <span>$120.00</span>
                           </div>
-                          <Link to="cart.html" className="button_drop">
+                          <Link to="/cart" className="button_drop">
                             Go to cart
                           </Link>
                           <Link

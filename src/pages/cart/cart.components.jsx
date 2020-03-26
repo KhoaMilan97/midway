@@ -1,7 +1,49 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+
+import { selectCartItems } from "../../redux/cart/cart.selector";
 
 class Cart extends React.Component {
+  selectAdults = () => {
+    const { cartItems } = this.props;
+    if (cartItems) {
+      return cartItems.reduce(
+        (accumulator, cartItem) => accumulator + cartItem.adult,
+        0
+      );
+    } else {
+      return 0;
+    }
+  };
+
+  selectChildren = () => {
+    const { cartItems } = this.props;
+    if (cartItems) {
+      return cartItems.reduce(
+        (accumulator, cartItem) => accumulator + cartItem.children,
+        0
+      );
+    } else {
+      return 0;
+    }
+  };
+
+  selectTotalCost = () => {
+    const { cartItems } = this.props;
+    if (cartItems) {
+      return cartItems.reduce(
+        (accumulator, cartItem) => accumulator + cartItem.totalCost,
+        0
+      );
+    } else {
+      return 0;
+    }
+  };
+
   render() {
+    const { cartItems } = this.props;
+
     return (
       <React.Fragment>
         <section id="hero_2">
@@ -65,99 +107,40 @@ class Cart extends React.Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div className="thumb_cart">
-                          <img src="img/thumb_cart_1.jpg" alt="cart_img" />
-                        </div>
-                        <span className="item_cart">Louvre Museum tickets</span>
-                      </td>
-                      <td>
-                        <div className="numbers-row">
-                          <input
-                            type="text"
-                            defaultValue={1}
-                            id="quantity_1"
-                            className="qty2 form-control"
-                            name="quantity_1"
-                          />
-                        </div>
-                      </td>
-                      <td>0%</td>
-                      <td>
-                        <strong>€24,71</strong>
-                      </td>
-                      <td className="options">
-                        <a href="/">
-                          <i className=" icon-trash" />
-                        </a>
-                        <a href="/">
-                          <i className="icon-ccw-2" />
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="thumb_cart">
-                          <img src="img/thumb_cart_1.jpg" alt="cart_img" />
-                        </div>
-                        <span className="item_cart">Eiffell tour</span>
-                      </td>
-                      <td>
-                        <div className="numbers-row">
-                          <input
-                            type="text"
-                            defaultValue={0}
-                            id="quantity_2"
-                            className="qty2 form-control"
-                            name="quantity_2"
-                          />
-                        </div>
-                      </td>
-                      <td>0%</td>
-                      <td>
-                        <strong>€0,0</strong>
-                      </td>
-                      <td className="options">
-                        <a href="/">
-                          <i className=" icon-trash" />
-                        </a>
-                        <a href="/">
-                          <i className="icon-ccw-2" />
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="thumb_cart">
-                          <img src="img/thumb_cart_1.jpg" alt="cart_img" />
-                        </div>
-                        <span className="item_cart">Senna river Tour</span>
-                      </td>
-                      <td>
-                        <div className="numbers-row">
-                          <input
-                            type="text"
-                            defaultValue={1}
-                            id="quantity_3"
-                            className="qty2 form-control"
-                            name="quantity_3"
-                          />
-                        </div>
-                      </td>
-                      <td>0%</td>
-                      <td>
-                        <strong>€24,71</strong>
-                      </td>
-                      <td className="options">
-                        <a href="/">
-                          <i className=" icon-trash" />
-                        </a>
-                        <a href="/">
-                          <i className="icon-ccw-2" />
-                        </a>
-                      </td>
-                    </tr>
+                    {cartItems.map(cartItem => (
+                      <tr key={cartItem.id}>
+                        <td>
+                          <div className="thumb_cart">
+                            <img
+                              src={`/img/tour/${cartItem.image}`}
+                              alt="cart_img"
+                            />
+                          </div>
+                          <span className="item_cart">
+                            {cartItem.name.slice(0, 30)}...
+                          </span>
+                        </td>
+                        <td>
+                          <div className="numbers-row">
+                            <input
+                              type="text"
+                              id="quantity_2"
+                              className="qty2 form-control"
+                              name="quantity_2"
+                            />
+                          </div>
+                        </td>
+                        <td>0%</td>
+                        <td>
+                          <strong>€0,0</strong>
+                        </td>
+                        <td className="options">
+                          <a href="/">
+                            <i className=" icon-trash" />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
 
@@ -173,11 +156,11 @@ class Cart extends React.Component {
                     <tbody>
                       <tr>
                         <td>Adults</td>
-                        <td className="text-right">2</td>
+                        <td className="text-right">{this.selectAdults()}</td>
                       </tr>
                       <tr>
                         <td>Children</td>
-                        <td className="text-right">0</td>
+                        <td className="text-right">{this.selectChildren()}</td>
                       </tr>
                       <tr>
                         <td>Dedicated tour guide</td>
@@ -222,4 +205,8 @@ class Cart extends React.Component {
   }
 }
 
-export default Cart;
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems
+});
+
+export default connect(mapStateToProps)(Cart);

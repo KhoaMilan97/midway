@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 
 import { selectTourDetails } from "../../redux/tour/tour.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { addCartItems } from "../../redux/cart/cart.action";
 
 import Gallery from "../../components/gallerry/gallery.components";
 
@@ -14,7 +15,9 @@ import "./tour-details.styles.scss";
 class TourDetails extends React.Component {
   state = {
     date: new Date(),
-    time: new Date()
+    time: new Date(),
+    adult: 0,
+    children: 0
   };
 
   onChange = date => this.setState({ date });
@@ -22,14 +25,83 @@ class TourDetails extends React.Component {
 
   handleClick = e => {
     e.preventDefault();
-    const { currentUser, history } = this.props;
+    const {
+      currentUser,
+      history,
+      match,
+      addCartItems,
+      toursDetails
+    } = this.props;
+    const { date, time, adult, children } = this.state;
     if (!currentUser) {
       history.push("/sign-in");
+    } else {
+      const cartItems = {
+        id: match.params.id,
+        date: date.toLocaleDateString(),
+        time: time.toLocaleTimeString(),
+        adult,
+        children,
+        totalCost: (children + adult) * 57,
+        image: toursDetails.image,
+        name: toursDetails.tour_name
+      };
+      addCartItems(cartItems);
+      history.push("/cart");
     }
+  };
+
+  onIncrement = name => {
+    switch (name) {
+      case "children":
+        this.setState({
+          children: this.state.children + 1
+        });
+        break;
+      case "adult":
+        this.setState({
+          adult: this.state.adult + 1
+        });
+        break;
+      default:
+        return name;
+    }
+  };
+
+  onDecrease = name => {
+    switch (name) {
+      case "children":
+        if (this.state.children <= 0) {
+          return;
+        }
+        this.setState({
+          children: this.state.children - 1
+        });
+        break;
+      case "adult":
+        if (this.state.adult <= 0) {
+          return;
+        }
+        this.setState({
+          adult: this.state.adult - 1
+        });
+        break;
+      default:
+        return name;
+    }
+  };
+
+  onInputChange = e => {
+    const { value, name } = e.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   render() {
     const { toursDetails } = this.props;
+    const { adult, children } = this.state;
+
     if (!toursDetails) return <Redirect to="/tours" />;
     return (
       <React.Fragment>
@@ -324,14 +396,25 @@ class TourDetails extends React.Component {
                       <div className="form-group">
                         <label>Người lớn</label>
                         <div className="numbers-row">
-                          <div className="dec button_inc">-</div>
-                          <div className="inc button_inc">+</div>
+                          <div
+                            className="dec button_inc"
+                            onClick={() => this.onDecrease("adult")}
+                          >
+                            -
+                          </div>
+                          <div
+                            className="inc button_inc"
+                            onClick={() => this.onIncrement("adult")}
+                          >
+                            +
+                          </div>
                           <input
                             type="text"
-                            defaultValue={1}
                             id="adults"
                             className="qty2 form-control"
-                            name="quantity"
+                            name="adult"
+                            value={adult}
+                            onChange={this.onInputChange}
                           />
                         </div>
                       </div>
@@ -340,14 +423,25 @@ class TourDetails extends React.Component {
                       <div className="form-group">
                         <label>Trẻ em</label>
                         <div className="numbers-row">
-                          <div className="dec button_inc">-</div>
-                          <div className="inc button_inc">+</div>
+                          <div
+                            className="dec button_inc"
+                            onClick={() => this.onDecrease("children")}
+                          >
+                            -
+                          </div>
+                          <div
+                            className="inc button_inc"
+                            onClick={() => this.onIncrement("children")}
+                          >
+                            +
+                          </div>
                           <input
                             type="text"
-                            defaultValue={0}
                             id="children"
                             className="qty2 form-control"
-                            name="quantity"
+                            name="children"
+                            value={children}
+                            onChange={this.onInputChange}
                           />
                         </div>
                       </div>
@@ -358,25 +452,27 @@ class TourDetails extends React.Component {
                     <tbody>
                       <tr>
                         <td>Người lớn</td>
-                        <td className="text-right">2</td>
+                        <td className="text-right">{adult}</td>
                       </tr>
                       <tr>
                         <td>Trẻ em</td>
-                        <td className="text-right">0</td>
+                        <td className="text-right">{children}</td>
                       </tr>
                       <tr>
                         <td>Total amount</td>
-                        <td className="text-right">3x $52</td>
+                        <td className="text-right">{children + adult}x $52</td>
                       </tr>
                       <tr className="total">
                         <td>Total cost</td>
-                        <td className="text-right">$154</td>
+                        <td className="text-right">
+                          ${(children + adult) * 52}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
-                  <a className="btn_full" href="!#" onClick={this.handleClick}>
+                  <button className="btn_full" onClick={this.handleClick}>
                     Book now
-                  </a>
+                  </button>
                 </div>
                 {/*/box_style_1 */}
                 <div className="box_style_4">
@@ -407,4 +503,10 @@ const mapStateToProps = (state, ownProps) => ({
   currentUser: selectCurrentUser(state)
 });
 
-export default withRouter(connect(mapStateToProps)(TourDetails));
+const mapDispatchToPorps = dispatch => ({
+  addCartItems: cartItems => dispatch(addCartItems(cartItems))
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToPorps)(TourDetails)
+);
