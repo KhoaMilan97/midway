@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { Link } from "react-router-dom";
 
 import OwlCarousel from "react-owl-carousel";
 
@@ -56,7 +57,7 @@ class TopTour extends React.Component {
                       <span>Hot</span>
                     </div>
                     <div className="img_container">
-                      <a href="single_hotel.html">
+                      <Link to={`/tours/${tour.id_tour}`}>
                         <img
                           src={`img/tour/${tour.image}`}
                           width={800}
@@ -76,7 +77,7 @@ class TopTour extends React.Component {
                             })}
                           </span>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="hotel_title">
                       <h3>

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { Link } from "react-router-dom";
 
 import Carousel from "../../components/carousel-home/carousel-home.components";
 import TopTours from "../../components/top-tour/top-tour.components";
@@ -102,9 +103,9 @@ class HomePages extends React.Component {
             <TopToursContainer isLoading={loading} />
 
             <p className="text-center add_bottom_30">
-              <a href="all_tours_list.html" className="btn_1">
+              <Link to="/tours" className="btn_1">
                 View all Tours
-              </a>
+              </Link>
             </p>
             <hr className="mt-5 mb-5" />
             <div className="main_title">
@@ -118,9 +119,9 @@ class HomePages extends React.Component {
             </div>
             <PopularToursContainer isLoading={loading} />
             <p className="text-center nopadding">
-              <a href="all_hotels_list.html" className="btn_1">
+              <Link to="/tours" className="btn_1">
                 View all Hotels
-              </a>
+              </Link>
             </p>
           </div>
           {/* End container */}
@@ -180,130 +181,11 @@ class HomePages extends React.Component {
                   </p>
                 </div>
               </div>
-              <div className="banner_2">
-                <div
-                  className="wrapper d-flex align-items-center opacity-mask"
-                  data-opacity-mask="rgba(0, 0, 0, 0.3)"
-                  style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-                >
-                  <div>
-                    <h3>
-                      Your Perfect
-                      <br />
-                      Tour Experience
-                    </h3>
-                    <p>Activities and accommodations</p>
-                    <a href="all_tours_list.html" className="btn_1">
-                      Read more
-                    </a>
-                  </div>
-                </div>
-                {/* /wrapper */}
-              </div>
-              {/* /banner_2 */}
             </div>
             {/* End container */}
           </div>
           {/* End white_bg */}
-          <div className="container margin_60">
-            <div className="main_title">
-              <h2>
-                Lates <span>Blog</span> News
-              </h2>
-              <p>
-                Quisque at tortor a libero posuere laoreet vitae sed arcu.
-                Curabitur consequat.
-              </p>
-            </div>
-            <div className="row">
-              <div className="col-lg-6">
-                <a className="box_news" href="blog.html">
-                  <figure>
-                    <img src="img/news_home_1.jpg" alt="" />
-                    <figcaption>
-                      <strong>28</strong>Dec
-                    </figcaption>
-                  </figure>
-                  <ul>
-                    <li>Mark Twain</li>
-                    <li>20.11.2017</li>
-                  </ul>
-                  <h4>Pri oportere scribentur eu</h4>
-                  <p>
-                    Cu eum alia elit, usu in eius appareat, deleniti sapientem
-                    honestatis eos ex. In ius esse ullum vidisse....
-                  </p>
-                </a>
-              </div>
-              {/* /box_news */}
-              <div className="col-lg-6">
-                <a className="box_news" href="blog.html">
-                  <figure>
-                    <img src="img/news_home_2.jpg" alt="" />
-                    <figcaption>
-                      <strong>28</strong>Dec
-                    </figcaption>
-                  </figure>
-                  <ul>
-                    <li>Jhon Doe</li>
-                    <li>20.11.2017</li>
-                  </ul>
-                  <h4>Duo eius postea suscipit ad</h4>
-                  <p>
-                    Cu eum alia elit, usu in eius appareat, deleniti sapientem
-                    honestatis eos ex. In ius esse ullum vidisse....
-                  </p>
-                </a>
-              </div>
-              {/* /box_news */}
-              <div className="col-lg-6">
-                <a className="box_news" href="blog.html">
-                  <figure>
-                    <img src="img/news_home_3.jpg" alt="" />
-                    <figcaption>
-                      <strong>28</strong>Dec
-                    </figcaption>
-                  </figure>
-                  <ul>
-                    <li>Luca Robinson</li>
-                    <li>20.11.2017</li>
-                  </ul>
-                  <h4>Elitr mandamus cu has</h4>
-                  <p>
-                    Cu eum alia elit, usu in eius appareat, deleniti sapientem
-                    honestatis eos ex. In ius esse ullum vidisse....
-                  </p>
-                </a>
-              </div>
-              {/* /box_news */}
-              <div className="col-lg-6">
-                <a className="box_news" href="blog.html">
-                  <figure>
-                    <img src="img/news_home_4.jpg" alt="" />
-                    <figcaption>
-                      <strong>28</strong>Dec
-                    </figcaption>
-                  </figure>
-                  <ul>
-                    <li>Paula Rodrigez</li>
-                    <li>20.11.2017</li>
-                  </ul>
-                  <h4>Id est adhuc ignota delenit</h4>
-                  <p>
-                    Cu eum alia elit, usu in eius appareat, deleniti sapientem
-                    honestatis eos ex. In ius esse ullum vidisse....
-                  </p>
-                </a>
-              </div>
-              {/* /box_news */}
-            </div>
-            {/* /row */}
-            <p className="btn_home_align">
-              <a href="blog.html" className="btn_1 rounded">
-                View all news
-              </a>
-            </p>
-          </div>
+
           {/* End container */}
         </main>
         {/* End main */}

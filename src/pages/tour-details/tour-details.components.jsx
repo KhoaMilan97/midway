@@ -459,11 +459,11 @@ class TourDetails extends React.Component {
                         <td className="text-right">{children}</td>
                       </tr>
                       <tr>
-                        <td>Total amount</td>
+                        <td>Tổng giá cả</td>
                         <td className="text-right">{children + adult}x $52</td>
                       </tr>
                       <tr className="total">
-                        <td>Total cost</td>
+                        <td>Tổng tiền</td>
                         <td className="text-right">
                           ${(children + adult) * 52}
                         </td>
@@ -481,7 +481,7 @@ class TourDetails extends React.Component {
                     <span>Book</span> by phone
                   </h4>
                   <a href="tel://004542344599" className="phone">
-                    +45 423 445 99
+                    +84 985 007 449
                   </a>
                   <small>Monday to Friday 9.00am - 7.30pm</small>
                 </div>

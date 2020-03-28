@@ -25,6 +25,14 @@ export function* googleSignIn() {
     const { user } = yield auth.signInWithPopup(googleProvider);
     console.log(user);
     const { displayName, email } = user;
+    // yield API.post("insert", {
+    //   id: uid,
+    //   email: email,
+    //   password: null,
+    //   fullname: displayName,
+    //   address: null,
+    //   phone: phoneNumber
+    // });
 
     yield put(signInSuccess({ displayName, email }));
   } catch (err) {
@@ -42,6 +50,14 @@ export function* facebookSignin() {
     const { user } = yield auth.signInWithPopup(facebookProvider);
 
     const { displayName, email } = user;
+    // yield API.post("insert", {
+    //   id: uid,
+    //   email: email,
+    //   password: null,
+    //   fullname: displayName,
+    //   address: null,
+    //   phone: phoneNumber
+    // });
 
     yield put(signInSuccess({ displayName, email }));
   } catch (err) {

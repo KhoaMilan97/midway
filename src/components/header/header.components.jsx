@@ -12,9 +12,9 @@ class Header extends React.Component {
     const { getTypeStart } = this.props;
     getTypeStart();
   }
+
   render() {
     const { signOutStart, currentUser, types } = this.props;
-
     return (
       <div>
         <div className="layer" />
@@ -32,13 +32,15 @@ class Header extends React.Component {
                     <li>
                       {currentUser ? (
                         <div>
-                          <span>{currentUser.displayName}</span>
+                          <span>
+                            Xin chào: <strong>{currentUser.displayName}</strong>
+                          </span>
                           <span
                             style={{ cursor: "pointer" }}
                             onClick={signOutStart}
                           >
                             {" "}
-                            | Đăng xuất
+                            | Thoát
                           </span>
                         </div>
                       ) : (
@@ -60,19 +62,19 @@ class Header extends React.Component {
               <div className="col-3">
                 <div id="logo_home">
                   <h1>
-                    <Link to="/" title="City tours travel template">
-                      City Tours travel template
+                    <Link to="/" title="Midway travel booking">
+                      Midway travel booking
                     </Link>
                   </h1>
                 </div>
               </div>
               <nav className="col-9">
-                <Link
+                <a
                   className="cmn-toggle-switch cmn-toggle-switch__htx open_close"
-                  to="/"
+                  href="!#"
                 >
                   <span>Menu mobile</span>
-                </Link>
+                </a>
                 <div className="main-menu">
                   <div id="header_menu">
                     <img
@@ -83,9 +85,9 @@ class Header extends React.Component {
                       data-retina="true"
                     />
                   </div>
-                  <Link to="/" className="open_close" id="close_in">
+                  <a href="!#" className="open_close" id="close_in">
                     <i className="icon_set_1_icon-77" />
-                  </Link>
+                  </a>
                   <ul>
                     <li className="submenu">
                       <Link to="/" className="show-submenu">
@@ -130,7 +132,7 @@ class Header extends React.Component {
                       <i className="icon_search" />
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <div className="dropdown dropdown-cart">
                       <Link to="/" data-toggle="dropdown" className="cart_bt">
                         <i className="icon_bag_alt" />
@@ -151,34 +153,7 @@ class Header extends React.Component {
                             <i className="icon-trash" />
                           </Link>
                         </li>
-                        {/* <li>
-                          <div className="image">
-                            <img
-                              src="img/thumb_cart_2.jpg"
-                              alt="thumb_cart_2"
-                            />
-                          </div>
-                          <strong>
-                            <Link to="/">Versailles tour</Link>2x $36.00{" "}
-                          </strong>
-                          <Link to="/" className="action">
-                            <i className="icon-trash" />
-                          </Link>
-                        </li> */}
-                        {/* <li>
-                          <div className="image">
-                            <img
-                              src="img/thumb_cart_3.jpg"
-                              alt="thumb_cart_3"
-                            />
-                          </div>
-                          <strong>
-                            <Link to="/">Versailles tour</Link>1x $36.00{" "}
-                          </strong>
-                          <Link to="/" className="action">
-                            <i className="icon-trash" />
-                          </Link>
-                        </li> */}
+
                         <li>
                           <div>
                             Total: <span>$120.00</span>
@@ -196,7 +171,7 @@ class Header extends React.Component {
                       </ul>
                     </div>
                     {/* End dropdown-cart*/}
-                  </li>
+                  {/* </li> */}
                 </ul>
               </nav>
             </div>

@@ -21,6 +21,9 @@ const Cart = lazy(() => import("./pages/cart/cart.components"));
 const Confirmation = lazy(() =>
   import("./pages/confirmation/confirmation.components")
 );
+const CheckOutPages = lazy(() =>
+  import("./pages/check-out/check-out.components")
+);
 
 class App extends React.Component {
   render() {
@@ -46,6 +49,13 @@ class App extends React.Component {
               path="/cart"
               render={() =>
                 !currentUser ? <Redirect to="/sign-in" /> : <Cart />
+              }
+            />
+            <Route
+              exact
+              path="/checkout"
+              render={() =>
+                !currentUser ? <Redirect to="/sign-in" /> : <CheckOutPages />
               }
             />
             <Route path="/tours" component={TourPages} />
