@@ -1,79 +1,49 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-class Summary extends React.Component {
-  selectAdults = () => {
-    const { cartItems } = this.props;
-    if (cartItems) {
-      return cartItems.reduce(
-        (accumulator, cartItem) => accumulator + cartItem.adult,
-        0
-      );
-    } else {
-      return 0;
-    }
-  };
+import { selectCartItems } from "../../redux/cart/cart.selector";
 
-  selectChildren = () => {
-    const { cartItems } = this.props;
-    if (cartItems) {
-      return cartItems.reduce(
-        (accumulator, cartItem) => accumulator + cartItem.children,
-        0
-      );
-    } else {
-      return 0;
-    }
-  };
+const Summary = ({ cartItems }) => {
+  return (
+    <div className="box_style_1">
+      <h3 className="inner">- Summary -</h3>
+      <table className="table table_summary">
+        <tbody>
+          <tr>
+            <td>Người lớn</td>
+            <td className="text-right">{cartItems.adult}</td>
+          </tr>
+          <tr>
+            <td>Trẻ em</td>
+            <td className="text-right">{cartItems.children}</td>
+          </tr>
+          <tr>
+            <td>{cartItems.name}</td>
+            <td className="text-right">
+              {cartItems.price.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND"
+              })}
+            </td>
+          </tr>
+          <tr className="total">
+            <td>Thành tiền</td>
+            <td className="text-right">
+              {cartItems.totalCost.toLocaleString("it-IT", {
+                style: "currency",
+                currency: "VND"
+              })}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-  selectTotalCost = () => {
-    const { cartItems } = this.props;
-    if (cartItems) {
-      return cartItems.reduce(
-        (accumulator, cartItem) => accumulator + cartItem.totalCost,
-        0
-      );
-    } else {
-      return 0;
-    }
-  };
-  render() {
-    return (
-      <div className="box_style_1">
-        <h3 className="inner">- Summary -</h3>
-        <table className="table table_summary">
-          <tbody>
-            <tr>
-              <td>Adults</td>
-              <td className="text-right">{this.selectAdults()}</td>
-            </tr>
-            <tr>
-              <td>Children</td>
-              <td className="text-right">{this.selectChildren()}</td>
-            </tr>
-            <tr>
-              <td>Dedicated tour guide</td>
-              <td className="text-right">$34</td>
-            </tr>
-            <tr>
-              <td>Insurance</td>
-              <td className="text-right">$34</td>
-            </tr>
-            <tr className="total">
-              <td>Total cost</td>
-              <td className="text-right">${this.selectTotalCost()}</td>
-            </tr>
-          </tbody>
-        </table>
-        <Link className="btn_full" to="/checkout">
-          Check out
-        </Link>
-        <a className="btn_full_outline" href="/">
-          <i className="icon-right" /> Continue shopping
-        </a>
-      </div>
-    );
-  }
-}
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems
+});
 
-export default Summary;
+export default connect(mapStateToProps)(Summary);

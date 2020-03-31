@@ -24,22 +24,22 @@ $(window).scroll(function() {
 });
 
 /* Menu */
-$(".open_close").on("click", function() {
+$("a.open_close").on("click", function() {
   $(".main-menu").toggleClass("show");
   $(".layer").toggleClass("layer-is-visible");
 });
-$(".show-submenu").on("click", function() {
+$("a.show-submenu").on("click", function() {
   $(this)
     .next()
     .toggleClass("show_normal");
 });
-$(".show-submenu-mega").on("click", function() {
+$("a.show-submenu-mega").on("click", function() {
   $(this)
     .next()
     .toggleClass("show_mega");
 });
 if ($(window).width() <= 480) {
-  $(".open_close").on("click", function() {
+  $("a.open_close").on("click", function() {
     $(".cmn-toggle-switch").removeClass("active");
   });
 }
@@ -317,6 +317,88 @@ $("#remember-me").iCheck({
 /* Opacity mask */
 $(".opacity-mask").each(function() {
   $(this).css("background-color", $(this).attr("data-opacity-mask"));
+});
+
+/* Carousel home */
+$("#carousel-home .owl-carousel").on("initialized.owl.carousel", function() {
+  setTimeout(function() {
+    $(
+      "#carousel-home .owl-carousel .owl-item.active .owl-slide-animated"
+    ).addClass("is-transitioned");
+    $("section").show();
+  }, 200);
+});
+
+const $owlCarousel = $("#carousel-home .owl-carousel").owlCarousel({
+  items: 1,
+  loop: true,
+  nav: false,
+  dots: true,
+  responsive: {
+    0: {
+      dots: false
+    },
+    767: {
+      dots: false
+    },
+    768: {
+      dots: true
+    }
+  }
+});
+
+$owlCarousel.on("changed.owl.carousel", function(e) {
+  $(".owl-slide-animated").removeClass("is-transitioned");
+  const $currentOwlItem = $(".owl-item").eq(e.item.index);
+  $currentOwlItem.find(".owl-slide-animated").addClass("is-transitioned");
+});
+
+$owlCarousel.on("resize.owl.carousel", function() {
+  setTimeout(function() {}, 50);
+});
+
+// Carousel
+$(".list_carousel").owlCarousel({
+  center: false,
+  items: 2,
+  loop: false,
+  margin: 0,
+  dots: false,
+  nav: true,
+  navText: [
+    "<i class='arrow_carrot-left'></i>",
+    "<i class='arrow_carrot-right'></i>"
+  ],
+  responsive: {
+    0: {
+      nav: false,
+      dots: true,
+      items: 1
+    },
+    768: {
+      nav: false,
+      dots: true,
+      items: 2
+    },
+    1024: {
+      items: 3
+    }
+  }
+});
+
+// Carousel
+$(".carousel_item").owlCarousel({
+  center: false,
+  items: 1,
+  lazyLoad: true,
+  loop: false,
+  margin: 0,
+  dots: false,
+  nav: true,
+  navText: [
+    "<i class='arrow_carrot-left'></i>",
+    "<i class='arrow_carrot-right'></i>"
+  ]
 });
 
 // Panel Dropdown

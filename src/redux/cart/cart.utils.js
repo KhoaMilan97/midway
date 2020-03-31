@@ -1,3 +1,3 @@
-export const addItem = (cartItems, cartItemToAdd) => {
-  return [...cartItems, { ...cartItemToAdd }];
-};
+// export const addItem = (cartItems, cartItemToAdd) => {
+//   return [...cartItems, { ...cartItemToAdd }];
+// };

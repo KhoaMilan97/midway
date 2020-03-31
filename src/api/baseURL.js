@@ -1,12 +1,7 @@
 import axios from "axios";
 
-let urlApi = "";
-
-if (process.env.NODE_ENV === `development`) {
-  urlApi = "http://localhost";
-} else {
-}
+let urlApi = "http://midway-travel.com/server";
 
 export default axios.create({
-  baseURL: `${urlApi}/midway/public/api/`
+  baseURL: `${urlApi}/public/api/`
 });

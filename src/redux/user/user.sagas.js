@@ -91,9 +91,9 @@ export function* register({
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield API.post("insert", {
       id: user.uid,
-      email: email,
-      password: password,
       fullname: displayName,
+      password: password,
+      email: email,
       address: null,
       phone: phone
     });

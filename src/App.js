@@ -17,7 +17,6 @@ const SignIn = lazy(() => import("./pages/sign-in/sign-in.components"));
 const SignUp = lazy(() => import("./pages/sign-up/sign-up.components"));
 const NotFound = lazy(() => import("./pages/404-pages/404-pages.components"));
 const TourPages = lazy(() => import("./pages/tours/tours.components"));
-const Cart = lazy(() => import("./pages/cart/cart.components"));
 const Confirmation = lazy(() =>
   import("./pages/confirmation/confirmation.components")
 );
@@ -44,13 +43,7 @@ class App extends React.Component {
               path="/sign-up"
               render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
             />
-            <Route
-              exact
-              path="/cart"
-              render={() =>
-                !currentUser ? <Redirect to="/sign-in" /> : <Cart />
-              }
-            />
+
             <Route
               exact
               path="/checkout"

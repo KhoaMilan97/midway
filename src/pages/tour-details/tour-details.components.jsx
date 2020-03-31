@@ -17,7 +17,8 @@ class TourDetails extends React.Component {
     date: new Date(),
     time: new Date(),
     adult: 0,
-    children: 0
+    children: 0,
+    price: 0
   };
 
   onChange = date => this.setState({ date });
@@ -25,6 +26,7 @@ class TourDetails extends React.Component {
 
   handleClick = e => {
     e.preventDefault();
+
     const {
       currentUser,
       history,
@@ -32,7 +34,11 @@ class TourDetails extends React.Component {
       addCartItems,
       toursDetails
     } = this.props;
+
     const { date, time, adult, children } = this.state;
+    const priceChildren = toursDetails.tour_price * 0.1;
+    const priceAdult = toursDetails.tour_price * 0.2;
+
     if (!currentUser) {
       history.push("/sign-in");
     } else {
@@ -42,12 +48,15 @@ class TourDetails extends React.Component {
         time: time.toLocaleTimeString(),
         adult,
         children,
-        totalCost: (children + adult) * 57,
-        image: toursDetails.image,
-        name: toursDetails.tour_name
+        totalCost:
+          adult * priceAdult +
+          children * priceChildren +
+          toursDetails.tour_price,
+        name: toursDetails.tour_name,
+        price: toursDetails.tour_price
       };
       addCartItems(cartItems);
-      history.push("/cart");
+      history.push("/checkout");
     }
   };
 
@@ -100,7 +109,7 @@ class TourDetails extends React.Component {
 
   render() {
     const { toursDetails } = this.props;
-    const { adult, children } = this.state;
+    const { adult, children, price } = this.state;
 
     if (!toursDetails) return <Redirect to="/tours" />;
     return (
@@ -215,7 +224,7 @@ class TourDetails extends React.Component {
                       href="!#"
                       className="btn_1 add_bottom_30"
                       data-toggle="modal"
-                      data-target="!#myReview"
+                      data-target="#myReview"
                     >
                       Leave a review
                     </a>
@@ -368,6 +377,7 @@ class TourDetails extends React.Component {
                         </label>
                         <DatePicker
                           selected={this.state.date}
+                          minDate={new Date()}
                           onChange={this.onChange}
                           className="date-pick form-control"
                         />
@@ -458,14 +468,19 @@ class TourDetails extends React.Component {
                         <td>Trẻ em</td>
                         <td className="text-right">{children}</td>
                       </tr>
-                      <tr>
-                        <td>Tổng giá cả</td>
-                        <td className="text-right">{children + adult}x $52</td>
-                      </tr>
+
                       <tr className="total">
                         <td>Tổng tiền</td>
                         <td className="text-right">
-                          ${(children + adult) * 52}
+                          {" "}
+                          {(
+                            adult * (toursDetails.tour_price * 0.2) +
+                            children * (toursDetails.tour_price * 0.1) +
+                            toursDetails.tour_price
+                          ).toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND"
+                          })}
                         </td>
                       </tr>
                     </tbody>
@@ -497,6 +512,9 @@ class TourDetails extends React.Component {
     );
   }
 }
+
+// ADULT: 0.5TOURS
+// CHILD: 0.25TOURS
 
 const mapStateToProps = (state, ownProps) => ({
   toursDetails: selectTourDetails(state, ownProps.match.params.id),
