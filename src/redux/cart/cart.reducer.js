@@ -1,5 +1,4 @@
 import { cartTypes } from "./cart.types";
-import { addItem } from "./cart.utils";
 
 const INITIAL_STATE = {
   cartItems: [],

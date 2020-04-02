@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import md5 from "md5";
 
 import { selectCurrentUser } from "./redux/user/user.selector";
 
@@ -26,6 +27,7 @@ const CheckOutPages = lazy(() =>
 
 class App extends React.Component {
   render() {
+    console.log(md5("123456"));
     const { currentUser } = this.props;
     return (
       <div className="App">

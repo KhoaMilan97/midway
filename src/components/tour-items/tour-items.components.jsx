@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import { Markup } from "interweave";
 
 const TourItems = ({
   tour_name,
@@ -30,7 +31,9 @@ const TourItems = ({
           <h3>
             <strong>{tour_name}</strong>
           </h3>
-          <p>{description.slice(0, 170) + "..."}</p>
+          <div>
+            <Markup content={description.slice(0, 170) + " ..."} />
+          </div>
         </div>
       </div>
       <div className="col-lg-2 col-md-2">

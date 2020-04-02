@@ -1,4 +1,5 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
+import md5 from "md5";
 
 import API from "../../api/baseURL";
 
@@ -23,18 +24,17 @@ import userTypes from "./user.types";
 export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    console.log(user);
-    const { displayName, email } = user;
-    // yield API.post("insert", {
-    //   id: uid,
-    //   email: email,
-    //   password: null,
-    //   fullname: displayName,
-    //   address: null,
-    //   phone: phoneNumber
-    // });
+    const { displayName, email, uid } = user;
+    yield API.post("insert", {
+      uid: uid,
+      email: email,
+      password: null,
+      fullname: displayName,
+      address: null,
+      phone: user.phoneNumber
+    });
 
-    yield put(signInSuccess({ displayName, email }));
+    yield put(signInSuccess({ displayName, email, uid }));
   } catch (err) {
     yield put(signInFailure(err.message));
   }
@@ -48,18 +48,18 @@ export function* onGoogleSignInStart() {
 export function* facebookSignin() {
   try {
     const { user } = yield auth.signInWithPopup(facebookProvider);
-
-    const { displayName, email } = user;
+    const { displayName, email, uid } = user;
+    console.log(user);
     // yield API.post("insert", {
-    //   id: uid,
+    //   uid: uid,
     //   email: email,
     //   password: null,
     //   fullname: displayName,
     //   address: null,
-    //   phone: phoneNumber
+    //   phone: user.phoneNumber
     // });
 
-    yield put(signInSuccess({ displayName, email }));
+    yield put(signInSuccess({ displayName, email, uid }));
   } catch (err) {
     yield put(signInFailure(err.message));
   }
@@ -90,7 +90,7 @@ export function* register({
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield API.post("insert", {
-      id: user.uid,
+      uid: user.uid,
       fullname: displayName,
       password: password,
       email: email,

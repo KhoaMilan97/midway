@@ -1,6 +1,6 @@
 import React from "react";
 import { createStructuredSelector } from "reselect";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { selectCurrentUser } from "../../redux/user/user.selector";
@@ -8,6 +8,7 @@ import { selectCartItems } from "../../redux/cart/cart.selector";
 import { bookToursStart } from "../../redux/cart/cart.action";
 
 import Summary from "../../components/summary/summary.components";
+import StripeButton from "../../components/stripe-button/stripe-button.components";
 
 class CheckOutPages extends React.Component {
   constructor(props) {
@@ -43,11 +44,15 @@ class CheckOutPages extends React.Component {
       children: cartItems.children,
       totalPrice: cartItems.totalCost
     });
+
+    const { history } = this.props;
+    history.push({ pathname: "/confirm" });
   };
 
   render() {
     const { displayName, email, phoneNumber } = this.state;
-    console.log(phoneNumber);
+    const { cartItems } = this.props;
+    console.log(this.props);
     return (
       <React.Fragment>
         <section id="hero_2">
@@ -151,8 +156,24 @@ class CheckOutPages extends React.Component {
                 {/*End step */}
                 <div className="form_title">
                   <h3>
-                    <strong>2</strong>Payment
+                    <strong>2</strong>Thanh toán
                   </h3>
+                </div>
+
+                <div className="step">
+                  <div className="form-group">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="policy_terms"
+                        id="policy_terms"
+                      />
+                      Thanh toán bằng tiền mặt
+                    </label>
+                  </div>
+
+                  <h4>Hoặc thanh toán bằng Payment</h4>
+                  <StripeButton price={cartItems.totalCost} />
                 </div>
 
                 {/*End step */}
@@ -187,4 +208,6 @@ const mapDispatchToProps = dispatch => ({
   bookToursStart: tours => dispatch(bookToursStart(tours))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckOutPages);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CheckOutPages)
+);

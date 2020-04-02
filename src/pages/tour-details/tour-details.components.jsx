@@ -2,12 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link, Redirect } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { Markup } from "interweave";
 
 import { selectTourDetails } from "../../redux/tour/tour.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { addCartItems } from "../../redux/cart/cart.action";
 
 import Gallery from "../../components/gallerry/gallery.components";
+import Review from "../../components/review/review.components";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./tour-details.styles.scss";
@@ -109,7 +111,7 @@ class TourDetails extends React.Component {
 
   render() {
     const { toursDetails } = this.props;
-    const { adult, children, price } = this.state;
+    const { adult, children } = this.state;
 
     if (!toursDetails) return <Redirect to="/tours" />;
     return (
@@ -212,7 +214,9 @@ class TourDetails extends React.Component {
                   </div>
                   <div className="col-lg-9">
                     <h4>Paris in love</h4>
-                    <p>{toursDetails.description}</p>
+                    <div>
+                      <Markup content={toursDetails.description} />
+                    </div>
                   </div>
                 </div>
 
@@ -293,58 +297,8 @@ class TourDetails extends React.Component {
                     </div>
                     {/* End row */}
                     <hr />
+
                     <div className="review_strip_single">
-                      <img
-                        src="/img/avatar1.jpg"
-                        alt="gallery_image"
-                        className="rounded-circle"
-                      />
-                      <small> - 10 March 2015 -</small>
-                      <h4>Jhon Doe</h4>
-                      <p>
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Sed a lorem quis neque interdum consequat ut sed
-                        sem. Duis quis tempor nunc. Interdum et malesuada fames
-                        ac ante ipsum primis in faucibus."
-                      </p>
-                      <div className="rating">
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile" />
-                        <i className="icon-smile" />
-                      </div>
-                    </div>
-                    {/* End review strip */}
-                    <div className="review_strip_single">
-                      <img
-                        src="/img/avatar3.jpg"
-                        alt="gallery_image"
-                        className="rounded-circle"
-                      />
-                      <small> - 10 March 2015 -</small>
-                      <h4>Jhon Doe</h4>
-                      <p>
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Sed a lorem quis neque interdum consequat ut sed
-                        sem. Duis quis tempor nunc. Interdum et malesuada fames
-                        ac ante ipsum primis in faucibus."
-                      </p>
-                      <div className="rating">
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile" />
-                        <i className="icon-smile" />
-                      </div>
-                    </div>
-                    {/* End review strip */}
-                    <div className="review_strip_single last">
-                      <img
-                        src="/img/avatar2.jpg"
-                        alt="gallery_image"
-                        className="rounded-circle"
-                      />
                       <small> - 10 March 2015 -</small>
                       <h4>Jhon Doe</h4>
                       <p>
@@ -508,6 +462,7 @@ class TourDetails extends React.Component {
           <div id="overlay" />
           {/* Mask on input focus */}
         </main>
+        <Review />
       </React.Fragment>
     );
   }

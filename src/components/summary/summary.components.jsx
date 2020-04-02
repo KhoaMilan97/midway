@@ -7,7 +7,7 @@ import { selectCartItems } from "../../redux/cart/cart.selector";
 const Summary = ({ cartItems }) => {
   return (
     <div className="box_style_1">
-      <h3 className="inner">- Summary -</h3>
+      <h3 className="inner">- Tóm tắt đơn hàng -</h3>
       <table className="table table_summary">
         <tbody>
           <tr>
