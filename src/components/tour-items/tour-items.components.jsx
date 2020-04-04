@@ -1,11 +1,15 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Markup } from "interweave";
+
+import { linkImage } from "../../util/linkImage";
+
+import "./tour-items.styles.scss";
 
 const TourItems = ({
   tour_name,
   tour_price,
-  description,
+  tour_duration,
+  departure,
   hot,
   id_tour,
   image
@@ -18,7 +22,7 @@ const TourItems = ({
         </div>
         <div className="img_list">
           <Link to={`/tours/${id_tour}`}>
-            <img src={`/img/tour/${image}`} alt="tours" />
+            <img src={`${linkImage}/${image}`} alt="tours" />
             <div className="short_info">
               <i className="icon_set_1_icon-4" />
               Museums{" "}
@@ -31,8 +35,17 @@ const TourItems = ({
           <h3>
             <strong>{tour_name}</strong>
           </h3>
-          <div>
-            <Markup content={description.slice(0, 170) + " ..."} />
+          <div style={{ marginLeft: 0 }}>
+            <ul style={{ listStyle: "none", marginLeft: 0, paddingLeft: 0 }}>
+              <li>
+                <strong>Thời gian: </strong>
+                {tour_duration}
+              </li>
+              <li>
+                <strong>Khởi hành: </strong>
+                {departure}
+              </li>
+            </ul>
           </div>
         </div>
       </div>

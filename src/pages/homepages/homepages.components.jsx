@@ -29,58 +29,58 @@ class HomePages extends React.Component {
             <div className="container margin_60">
               <div className="row small-gutters categories_grid">
                 <div className="col-sm-12 col-md-6">
-                  <a href="all_tours_list.html">
+                  <Link to="/tours">
                     <img
                       src="img/img_cat_home_1.jpg"
                       alt=""
                       className="img-fluid"
                     />
                     <div className="wrapper">
-                      <h2>Special Offers</h2>
+                      <h2>All tours</h2>
                       <p>1150 Locations</p>
                     </div>
-                  </a>
+                  </Link>
                 </div>
                 <div className="col-sm-12 col-md-6">
                   <div className="row small-gutters mt-md-0 mt-sm-2">
                     <div className="col-sm-6">
-                      <a href="all_tours_list.html">
+                      <Link to="/tours/tour-mien-bac/1">
                         <img
                           src="img/img_cat_home_2.jpg"
                           alt=""
                           className="img-fluid"
                         />
                         <div className="wrapper">
-                          <h2>Tours</h2>
+                          <h2>Tours miền bắc</h2>
                           <p>800 Locations</p>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="col-sm-6">
-                      <a href="all_hotels_list.html">
+                      <Link to="/tours/tour-mien-trung/2">
                         <img
                           src="img/img_cat_home_3.jpg"
                           alt=""
                           className="img-fluid"
                         />
                         <div className="wrapper">
-                          <h2>Hotels</h2>
+                          <h2>Tour miền trung</h2>
                           <p>650 Locations</p>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                     <div className="col-sm-12 mt-sm-2">
-                      <a href="all_restaurants_list.html">
+                      <Link to="/tours/tour-mien-nam/3">
                         <img
                           src="img/img_cat_home_4.jpg"
                           alt=""
                           className="img-fluid"
                         />
                         <div className="wrapper">
-                          <h2>Restaurants</h2>
+                          <h2>Tours miền nam</h2>
                           <p>1132 Locations</p>
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -93,18 +93,14 @@ class HomePages extends React.Component {
           <div className="container margin_60">
             <div className="main_title">
               <h2>
-                <span>Top</span> Tours
+                <span>Tours</span> hot
               </h2>
-              <p>
-                Quisque at tortor a libero posuere laoreet vitae sed arcu.
-                Curabitur consequat.
-              </p>
             </div>
             <TopToursContainer isLoading={loading} />
 
             <p className="text-center add_bottom_30">
               <Link to="/tours" className="btn_1">
-                View all Tours
+                Xem tất cả tours
               </Link>
             </p>
             <hr className="mt-5 mb-5" />
@@ -112,15 +108,11 @@ class HomePages extends React.Component {
               <h2>
                 <span>Tours</span> phổ biến
               </h2>
-              <p>
-                Quisque at tortor a libero posuere laoreet vitae sed arcu.
-                Curabitur consequat.
-              </p>
             </div>
             <PopularToursContainer isLoading={loading} />
             <p className="text-center nopadding">
               <Link to="/tours" className="btn_1">
-                View all Hotels
+                Xem tất cả tours
               </Link>
             </p>
           </div>
@@ -144,11 +136,10 @@ class HomePages extends React.Component {
                     width={75}
                     height={75}
                   />
-                  <h3>Itineraries studied in detail</h3>
+                  <h3>Tour free &#38; Easy</h3>
                   <p>
-                    Suscipit invenire petentium per in. Ne magna assueverit vel.
-                    Vix movet perfecto facilisis in, ius ad maiorum corrumpit,
-                    his esse docendi in.
+                    Chuyên tour free &#38; easy với lịch trình đa dạng, dịch vụ
+                    chất lượng, giá ưu đãi
                   </p>
                 </div>
                 <div className="col-md-4 text-center">
@@ -158,12 +149,10 @@ class HomePages extends React.Component {
                     width={75}
                     height={75}
                   />
-                  <h3>Room and food included</h3>
+                  <h3>Land tour &#38; dịch vụ</h3>
                   <p>
-                    {" "}
-                    Cum accusam voluptatibus at, et eum fuisset sententiae.
-                    Postulant tractatos ius an, in vis fabulas percipitur, est
-                    audiam phaedrum electram ex.
+                    Chuyên tour trọn gói tại điểm đến - Vé tham quan &#38; show.
+                    Tour ngắn ngày - Hoạt động trải nghiệm...
                   </p>
                 </div>
                 <div className="col-md-4 text-center">
@@ -173,11 +162,10 @@ class HomePages extends React.Component {
                     width={75}
                     height={75}
                   />
-                  <h3>Everything organized</h3>
+                  <h3>Chất lượng - giá cạnh tranh</h3>
                   <p>
-                    Integre vivendo percipitur eam in, graece suavitate cu vel.
-                    Per inani persius accumsan no. An case duis option est, pro
-                    ad fastidii contentiones.
+                    Chúng tôi luôn nỗ lực tối ưu nhất các sản phẩm của mình,
+                    chính sách hoàn tiền néu giá chưa phải tốt nhất
                   </p>
                 </div>
               </div>

@@ -1,5 +1,4 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
-import md5 from "md5";
 
 import API from "../../api/baseURL";
 
@@ -25,14 +24,14 @@ export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
     const { displayName, email, uid } = user;
-    yield API.post("insert", {
-      uid: uid,
-      email: email,
-      password: null,
-      fullname: displayName,
-      address: null,
-      phone: user.phoneNumber
-    });
+    // yield API.post("insert", {
+    //   uid: uid,
+    //   email: email,
+    //   password: null,
+    //   fullname: displayName,
+    //   address: null,
+    //   phone: user.phoneNumber
+    // });
 
     yield put(signInSuccess({ displayName, email, uid }));
   } catch (err) {

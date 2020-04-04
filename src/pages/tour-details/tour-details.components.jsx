@@ -209,11 +209,7 @@ class TourDetails extends React.Component {
                 <Gallery />
                 <hr />
                 <div className="row">
-                  <div className="col-lg-3">
-                    <h3>Description</h3>
-                  </div>
-                  <div className="col-lg-9">
-                    <h4>Paris in love</h4>
+                  <div className="col-lg-12">
                     <div>
                       <Markup content={toursDetails.description} />
                     </div>
@@ -245,62 +241,12 @@ class TourDetails extends React.Component {
                       </div>
                     </div>
                     {/* End general_rating */}
-                    <div className="row" id="rating_summary">
-                      <div className="col-md-6">
-                        <ul>
-                          <li>
-                            Position
-                            <div className="rating">
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile" />
-                              <i className="icon-smile" />
-                            </div>
-                          </li>
-                          <li>
-                            Tourist guide
-                            <div className="rating">
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile" />
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-md-6">
-                        <ul>
-                          <li>
-                            Price
-                            <div className="rating">
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile" />
-                              <i className="icon-smile" />
-                            </div>
-                          </li>
-                          <li>
-                            Quality
-                            <div className="rating">
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                              <i className="icon-smile voted" />
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* End row */}
+
                     <hr />
 
                     <div className="review_strip_single">
                       <small> - 10 March 2015 -</small>
-                      <h4>Jhon Doe</h4>
+                      <h4 style={{ marginLeft: 0 }}>Jhon Doe</h4>
                       <p>
                         "Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Sed a lorem quis neque interdum consequat ut sed

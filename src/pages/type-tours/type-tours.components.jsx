@@ -40,7 +40,7 @@ class TypeTours extends React.Component {
     return (
       <React.Fragment>
         <BannerHeader
-          title={`${match.params.type}`}
+          title={typeTours[parseInt(match.params.id) - 1].name_type}
           content="Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula."
         />
         <main>

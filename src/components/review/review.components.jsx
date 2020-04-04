@@ -79,12 +79,11 @@ class Review extends React.Component {
                         onChange={this.handleChange}
                       >
                         <option value>Please review</option>
-                        <option value="Low">Low</option>
-                        <option value="Sufficient">Sufficient</option>
-                        <option value="Good">Good</option>
-                        <option value="Excellent">Excellent</option>
-                        <option value="Super">Super</option>
-                        <option value="Not rated">I don't know</option>
+                        <option value="1">Low</option>
+                        <option value="2">Sufficient</option>
+                        <option value="3">Good</option>
+                        <option value="4">Excellent</option>
+                        <option value="5">Super</option>
                       </select>
                     </div>
                   </div>
@@ -99,12 +98,11 @@ class Review extends React.Component {
                         onChange={this.handleChange}
                       >
                         <option value>Please review</option>
-                        <option value="Low">Low</option>
-                        <option value="Sufficient">Sufficient</option>
-                        <option value="Good">Good</option>
-                        <option value="Excellent">Excellent</option>
-                        <option value="Superb">Super</option>
-                        <option value="Not rated">I don't know</option>
+                        <option value="1">Low</option>
+                        <option value="2">Sufficient</option>
+                        <option value="3">Good</option>
+                        <option value="4">Excellent</option>
+                        <option value="5">Super</option>
                       </select>
                     </div>
                   </div>
@@ -122,12 +120,11 @@ class Review extends React.Component {
                         onChange={this.handleChange}
                       >
                         <option value>Please review</option>
-                        <option value="Low">Low</option>
-                        <option value="Sufficient">Sufficient</option>
-                        <option value="Good">Good</option>
-                        <option value="Excellent">Excellent</option>
-                        <option value="Superb">Super</option>
-                        <option value="Not rated">I don't know</option>
+                        <option value="1">Low</option>
+                        <option value="2">Sufficient</option>
+                        <option value="3">Good</option>
+                        <option value="4">Excellent</option>
+                        <option value="5">Super</option>
                       </select>
                     </div>
                   </div>
@@ -142,12 +139,11 @@ class Review extends React.Component {
                         onChange={this.handleChange}
                       >
                         <option value>Please review</option>
-                        <option value="Low">Low</option>
-                        <option value="Sufficient">Sufficient</option>
-                        <option value="Good">Good</option>
-                        <option value="Excellent">Excellent</option>
-                        <option value="Superb">Super</option>
-                        <option value="Not rated">I don't know</option>
+                        <option value="1">Low</option>
+                        <option value="2">Sufficient</option>
+                        <option value="3">Good</option>
+                        <option value="4">Excellent</option>
+                        <option value="5">Super</option>
                       </select>
                     </div>
                   </div>

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import OwlCarousel from "react-owl-carousel";
 
 import { selectPopularTours } from "../../redux/tour/tour.selector";
+import { linkImage } from "../../util/linkImage";
 
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -55,7 +56,7 @@ const PopularTours = ({ popularTours }) => (
                 <div className="img_container">
                   <Link to={`/tours/${tour.id_tour}`}>
                     <img
-                      src={`img/tour/${tour.image}`}
+                      src={`${linkImage}/${tour.image}`}
                       width={800}
                       height={533}
                       className="img-fluid"
