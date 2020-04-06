@@ -15,8 +15,12 @@ class AllTours extends React.Component {
     super(props);
     this.state = {
       currentPage: 1,
-      toursPerPages: 5
+      toursPerPages: 5,
     };
+  }
+
+  componentDidMount() {
+    document.title = this.props.title;
   }
 
   handlePageChange(pageNumber) {
@@ -61,7 +65,7 @@ class AllTours extends React.Component {
                         All tours
                       </Link>
                     </li>
-                    {typeTours.map(item => (
+                    {typeTours.map((item) => (
                       <li key={item.id}>
                         <Link to={`/tours/${item.type_link}/${item.id}`}>
                           <i className="icon_set_1_icon-51" />
@@ -85,7 +89,7 @@ class AllTours extends React.Component {
               </aside>
               {/*End aside */}
               <div className="col-lg-9">
-                {currentTours.map(tour => (
+                {currentTours.map((tour) => (
                   <TourItems key={tour.id_tour} {...tour} />
                 ))}
 
@@ -115,7 +119,7 @@ class AllTours extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   tours: selectAllTours,
-  typeTours: selectAllType
+  typeTours: selectAllType,
 });
 
 export default connect(mapStateToProps)(AllTours);

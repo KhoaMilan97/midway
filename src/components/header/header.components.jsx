@@ -7,28 +7,54 @@ import { signOutStart } from "../../redux/user/user.action";
 import { getTypeStart } from "../../redux/type-tour/type-tour.action";
 import { selectAllType } from "../../redux/type-tour/type-tour.selector";
 
+import "./header.styles.scss";
+
 class Header extends React.Component {
+  state = {
+    show: false,
+  };
+
   componentDidMount() {
     const { getTypeStart } = this.props;
     getTypeStart();
   }
 
+  handleClick = () => {
+    this.setState({
+      show: !this.state.show,
+    });
+  };
+
   render() {
     const { signOutStart, currentUser, types } = this.props;
+    let className = ["main-menu"];
+    if (this.state.show) {
+      className = ["main-menu", "show"];
+    }
     return (
       <div>
         <div className="layer" />
-
         <header>
           <div id="top_line">
             <div className="container">
               <div className="row">
                 <div className="col-6">
                   <i className="icon-phone" />
-                  <strong>0985 007 449</strong>
+                  Gọi ngay:
+                  <strong> 0985 007 449</strong>
                 </div>
                 <div className="col-6">
                   <ul id="top_links">
+                    <li className="submenu">
+                      <Link to="/contact" className="show-submenu">
+                        Liên hệ
+                      </Link>
+                    </li>
+                    <li className="submenu">
+                      <Link to="/" className="show-submenu">
+                        Tin tức
+                      </Link>
+                    </li>
                     <li>
                       {currentUser ? (
                         <div>
@@ -69,13 +95,13 @@ class Header extends React.Component {
                 </div>
               </div>
               <nav className="col-9">
-                <a
+                <button
                   className="cmn-toggle-switch cmn-toggle-switch__htx open_close"
-                  href="!#"
+                  onClick={this.handleClick}
                 >
                   <span>Menu mobile</span>
-                </a>
-                <div className="main-menu">
+                </button>
+                <div className={className.join(" ")}>
                   <div id="header_menu">
                     <img
                       src="img/logo_sticky.png"
@@ -85,9 +111,9 @@ class Header extends React.Component {
                       data-retina="true"
                     />
                   </div>
-                  <a href="!#" className="open_close" id="close_in">
+                  <button className="open_close" id="close_in">
                     <i className="icon_set_1_icon-77" />
-                  </a>
+                  </button>
                   <ul>
                     <li className="submenu">
                       <Link to="/" className="show-submenu">
@@ -101,28 +127,19 @@ class Header extends React.Component {
                     </li>
                     <li className="submenu">
                       <Link to="/tours" className="show-submenu">
-                        Tours <i className="icon-down-open-mini" />
-                      </Link>
-                      <ul>
-                        {types.map(type => (
-                          <li key={type.id}>
-                            <Link to={`/tours/${type.type_link}/${type.id}`}>
-                              {type.name_type}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                    <li className="submenu">
-                      <Link to="/" className="show-submenu">
-                        Liên hệ
+                        Tất cả Tour
                       </Link>
                     </li>
-                    <li className="submenu">
-                      <Link to="/" className="show-submenu">
-                        Tin tức
-                      </Link>
-                    </li>
+                    {types.map((type) => (
+                      <li key={type.id} className="submenu">
+                        <Link
+                          to={`/tours/${type.type_link}/${type.id}`}
+                          className="show-submenu"
+                        >
+                          {type.name_type}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 {/* End main-menu */}
@@ -132,46 +149,6 @@ class Header extends React.Component {
                       <i className="icon_search" />
                     </Link>
                   </li>
-                  {/* <li>
-                    <div className="dropdown dropdown-cart">
-                      <Link to="/" data-toggle="dropdown" className="cart_bt">
-                        <i className="icon_bag_alt" />
-                        <strong>3</strong>
-                      </Link>
-                      <ul className="dropdown-menu" id="cart_items">
-                        <li>
-                          <div className="image">
-                            <img
-                              src="img/thumb_cart_1.jpg"
-                              alt="thumb_cart_1"
-                            />
-                          </div>
-                          <strong>
-                            <Link to="/">Louvre museum</Link>1x $36.00{" "}
-                          </strong>
-                          <Link to="/" className="action">
-                            <i className="icon-trash" />
-                          </Link>
-                        </li>
-
-                        <li>
-                          <div>
-                            Total: <span>$120.00</span>
-                          </div>
-                          <Link to="/cart" className="button_drop">
-                            Go to cart
-                          </Link>
-                          <Link
-                            to="payment.html"
-                            className="button_drop outline"
-                          >
-                            Check out
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                    {/* End dropdown-cart*/}
-                  {/* </li> */}
                 </ul>
               </nav>
             </div>
@@ -185,12 +162,12 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  types: selectAllType
+  types: selectAllType,
 });
 
-const mapDispachToProps = dispatch => ({
+const mapDispachToProps = (dispatch) => ({
   signOutStart: () => dispatch(signOutStart()),
-  getTypeStart: () => dispatch(getTypeStart())
+  getTypeStart: () => dispatch(getTypeStart()),
 });
 
 export default connect(mapStateToProps, mapDispachToProps)(Header);

@@ -18,14 +18,18 @@ class CheckOutPages extends React.Component {
     this.state = {
       displayName: currentUser.displayName,
       email: currentUser.email,
-      phoneNumber: currentUser.phoneNumber || ""
+      phoneNumber: currentUser.phoneNumber || "",
     };
   }
 
-  handleChange = e => {
+  componentDidMount() {
+    document.title = this.props.title;
+  }
+
+  handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
   handleSubmit = () => {
@@ -42,7 +46,7 @@ class CheckOutPages extends React.Component {
       time: cartItems.time,
       adult: cartItems.adult,
       children: cartItems.children,
-      totalPrice: cartItems.totalCost
+      totalPrice: cartItems.totalCost,
     });
 
     const { history } = this.props;
@@ -201,11 +205,11 @@ class CheckOutPages extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  cartItems: selectCartItems
+  cartItems: selectCartItems,
 });
 
-const mapDispatchToProps = dispatch => ({
-  bookToursStart: tours => dispatch(bookToursStart(tours))
+const mapDispatchToProps = (dispatch) => ({
+  bookToursStart: (tours) => dispatch(bookToursStart(tours)),
 });
 
 export default withRouter(

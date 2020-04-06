@@ -15,8 +15,15 @@ class TypeTours extends React.Component {
     super(props);
     this.state = {
       currentPage: 1,
-      toursPerPages: 5
+      toursPerPages: 5,
     };
+  }
+
+  componentDidMount() {
+    const { typeTours, match } = this.props;
+    document.title = `Midway - ${
+      typeTours[parseInt(match.params.id) - 1].name_type
+    }`;
   }
 
   handlePageChange(pageNumber) {
@@ -69,7 +76,7 @@ class TypeTours extends React.Component {
                         All tours
                       </Link>
                     </li>
-                    {typeTours.map(item => (
+                    {typeTours.map((item) => (
                       <li key={item.id}>
                         <Link
                           to={`/tours/${item.type_link}/${item.id}`}
@@ -96,7 +103,7 @@ class TypeTours extends React.Component {
               </aside>
               {/*End aside */}
               <div className="col-lg-9">
-                {currentTours.map(tour => (
+                {currentTours.map((tour) => (
                   <TourItems key={tour.id_tour} {...tour} />
                 ))}
 
@@ -126,7 +133,7 @@ class TypeTours extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   typeTours: selectAllType(state),
-  toursWithType: selectTourWithType(state, ownProps.match.params.id)
+  toursWithType: selectTourWithType(state, ownProps.match.params.id),
 });
 
 export default withRouter(connect(mapStateToProps)(TypeTours));

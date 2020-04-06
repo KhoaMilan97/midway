@@ -20,13 +20,18 @@ class TourDetails extends React.Component {
     time: new Date(),
     adult: 0,
     children: 0,
-    price: 0
+    price: 0,
   };
 
-  onChange = date => this.setState({ date });
-  onTimeChange = time => this.setState({ time });
+  componentDidMount() {
+    const { toursDetails } = this.props;
+    document.title = `Midways - ${toursDetails.tour_name}`;
+  }
 
-  handleClick = e => {
+  onChange = (date) => this.setState({ date });
+  onTimeChange = (time) => this.setState({ time });
+
+  handleClick = (e) => {
     e.preventDefault();
 
     const {
@@ -34,7 +39,7 @@ class TourDetails extends React.Component {
       history,
       match,
       addCartItems,
-      toursDetails
+      toursDetails,
     } = this.props;
 
     const { date, time, adult, children } = this.state;
@@ -55,23 +60,23 @@ class TourDetails extends React.Component {
           children * priceChildren +
           toursDetails.tour_price,
         name: toursDetails.tour_name,
-        price: toursDetails.tour_price
+        price: toursDetails.tour_price,
       };
       addCartItems(cartItems);
       history.push("/checkout");
     }
   };
 
-  onIncrement = name => {
+  onIncrement = (name) => {
     switch (name) {
       case "children":
         this.setState({
-          children: this.state.children + 1
+          children: this.state.children + 1,
         });
         break;
       case "adult":
         this.setState({
-          adult: this.state.adult + 1
+          adult: this.state.adult + 1,
         });
         break;
       default:
@@ -79,14 +84,14 @@ class TourDetails extends React.Component {
     }
   };
 
-  onDecrease = name => {
+  onDecrease = (name) => {
     switch (name) {
       case "children":
         if (this.state.children <= 0) {
           return;
         }
         this.setState({
-          children: this.state.children - 1
+          children: this.state.children - 1,
         });
         break;
       case "adult":
@@ -94,7 +99,7 @@ class TourDetails extends React.Component {
           return;
         }
         this.setState({
-          adult: this.state.adult - 1
+          adult: this.state.adult - 1,
         });
         break;
       default:
@@ -102,10 +107,10 @@ class TourDetails extends React.Component {
     }
   };
 
-  onInputChange = e => {
+  onInputChange = (e) => {
     const { value, name } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -127,7 +132,7 @@ class TourDetails extends React.Component {
             width: "100%",
             height: "470",
             backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat"
+            backgroundRepeat: "no-repeat",
           }}
         >
           <div className="parallax-content-2">
@@ -141,7 +146,7 @@ class TourDetails extends React.Component {
                     <span style={{ fontSize: "30px" }}>
                       {toursDetails.tour_price.toLocaleString("it-IT", {
                         style: "currency",
-                        currency: "VND"
+                        currency: "VND",
                       })}
                     </span>
                     /người
@@ -174,38 +179,6 @@ class TourDetails extends React.Component {
           <div className="container margin_60">
             <div className="row">
               <div className="col-lg-8" id="single_tour_desc">
-                <div id="single_tour_feat">
-                  <ul>
-                    <li>
-                      <i className="icon_set_1_icon-4" />
-                      Museum
-                    </li>
-                    <li>
-                      <i className="icon_set_1_icon-83" />3 Hours
-                    </li>
-                    <li>
-                      <i className="icon_set_1_icon-13" />
-                      Accessibiliy
-                    </li>
-                    <li>
-                      <i className="icon_set_1_icon-82" />
-                      144 Likes
-                    </li>
-                    <li>
-                      <i className="icon_set_1_icon-22" />
-                      Pet allowed
-                    </li>
-                    <li>
-                      <i className="icon_set_1_icon-97" />
-                      Audio guide
-                    </li>
-                    <li>
-                      <i className="icon_set_1_icon-29" />
-                      Tour guide
-                    </li>
-                  </ul>
-                </div>
-
                 <Gallery />
                 <hr />
                 <div className="row">
@@ -290,7 +263,7 @@ class TourDetails extends React.Component {
                         </label>
                         <DatePicker
                           selected={this.state.time}
-                          onChange={time => this.onTimeChange(time)}
+                          onChange={(time) => this.onTimeChange(time)}
                           showTimeSelect
                           showTimeSelectOnly
                           timeIntervals={15}
@@ -379,14 +352,14 @@ class TourDetails extends React.Component {
                             toursDetails.tour_price
                           ).toLocaleString("it-IT", {
                             style: "currency",
-                            currency: "VND"
+                            currency: "VND",
                           })}
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   <button className="btn_full" onClick={this.handleClick}>
-                    Book now
+                    Đặt tour
                   </button>
                 </div>
                 {/*/box_style_1 */}
@@ -419,11 +392,11 @@ class TourDetails extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
   toursDetails: selectTourDetails(state, ownProps.match.params.id),
-  currentUser: selectCurrentUser(state)
+  currentUser: selectCurrentUser(state),
 });
 
-const mapDispatchToPorps = dispatch => ({
-  addCartItems: cartItems => dispatch(addCartItems(cartItems))
+const mapDispatchToPorps = (dispatch) => ({
+  addCartItems: (cartItems) => dispatch(addCartItems(cartItems)),
 });
 
 export default withRouter(

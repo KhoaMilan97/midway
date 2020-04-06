@@ -18,6 +18,7 @@ class HomePages extends React.Component {
   componentDidMount() {
     const { getTourStart } = this.props;
     getTourStart();
+    document.title = this.props.title;
   }
   render() {
     const { loading } = this.props;
@@ -183,11 +184,11 @@ class HomePages extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: selectTourLoading
+  loading: selectTourLoading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getTourStart: () => dispatch(getTourStart())
+const mapDispatchToProps = (dispatch) => ({
+  getTourStart: () => dispatch(getTourStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePages);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FacebookFanpages from "../facebook-pages/facebook-pages.components";
 
 const Footer = () => (
   <React.Fragment>
@@ -15,7 +16,7 @@ const Footer = () => (
               khoamilan123@gmail.com.com
             </a>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-2">
             <h3>Liên kết hữu ích</h3>
             <ul>
               <li>
@@ -33,7 +34,7 @@ const Footer = () => (
               </li>
             </ul>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-2">
             <h3>Discover</h3>
             <ul>
               <li>
@@ -50,72 +51,9 @@ const Footer = () => (
               </li>
             </ul>
           </div>
-          <div className="col-md-2">
-            <h3>Settings</h3>
-            <div className="styled-select">
-              <select name="lang" id="lang">
-                <option value="English">English</option>
-                <option value="French">French</option>
-                <option value="Spanish">Spanish</option>
-                <option value="Russian">Russian</option>
-              </select>
-            </div>
-            <div className="styled-select">
-              <select name="currency" id="currency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="RUB">RUB</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        {/* End row */}
-        <div className="row">
-          <div className="col-md-12">
-            <div id="social_footer">
-              <ul>
-                <li>
-                  <Link
-                    to="https://www.facebook.com/KhoaMilan97"
-                    target="_blank"
-                  >
-                    <i className="icon-facebook" />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="https://twitter.com/Khoa_Milan" target="_blank">
-                    <i className="icon-twitter" />
-                  </Link>
-                </li>
-                <li>
-                  <a href="/">
-                    <i className="icon-google" />
-                  </a>
-                </li>
-                <li>
-                  <a href="/">
-                    <i className="icon-instagram" />
-                  </a>
-                </li>
-                <li>
-                  <a href="/">
-                    <i className="icon-pinterest" />
-                  </a>
-                </li>
-                <li>
-                  <a href="/">
-                    <i className="icon-vimeo" />
-                  </a>
-                </li>
-                <li>
-                  <a href="/">
-                    <i className="icon-youtube-play" />
-                  </a>
-                </li>
-              </ul>
-              <p>© Citytours 2018</p>
-            </div>
+          <div className="col-md-4">
+            <h3>Trang</h3>
+            <FacebookFanpages />
           </div>
         </div>
         {/* End row */}

@@ -15,7 +15,7 @@ import {
   rePassowrd,
   minLengthPassword,
   minLengthUsername,
-  emailExist
+  emailExist,
 } from "../../util/checkValidate.components";
 
 class SignUp extends React.Component {
@@ -27,12 +27,13 @@ class SignUp extends React.Component {
       password: "",
       phone: "",
       confirmPassword: "",
-      user: ""
+      user: "",
     };
   }
 
   componentDidMount() {
-    API.get("user").then(res => this.setState({ user: res.data }));
+    API.get("user").then((res) => this.setState({ user: res.data }));
+    document.title = this.props.title;
   }
 
   onSubmit(e) {
@@ -46,10 +47,10 @@ class SignUp extends React.Component {
     }
   }
 
-  onChangeHandler = e => {
+  onChangeHandler = (e) => {
     const { name, value } = e.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -72,8 +73,8 @@ class SignUp extends React.Component {
                     </div>
                     <hr />
                     <Form
-                      onSubmit={e => this.onSubmit(e)}
-                      ref={c => {
+                      onSubmit={(e) => this.onSubmit(e)}
+                      ref={(c) => {
                         this.form = c;
                       }}
                     >
@@ -141,7 +142,7 @@ class SignUp extends React.Component {
                       <button className="btn_full">Tại tài khoản</button>
                       <CheckButton
                         style={{ display: "none" }}
-                        ref={c => {
+                        ref={(c) => {
                           this.checkBtn = c;
                         }}
                       />
@@ -158,9 +159,9 @@ class SignUp extends React.Component {
   }
 }
 
-const mapDisptachToProps = dispatch => ({
+const mapDisptachToProps = (dispatch) => ({
   registerStart: (email, password, displayName, phone) =>
-    dispatch(registerStart({ email, password, displayName, phone }))
+    dispatch(registerStart({ email, password, displayName, phone })),
 });
 
 export default connect(null, mapDisptachToProps)(SignUp);

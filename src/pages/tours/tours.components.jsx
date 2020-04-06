@@ -30,7 +30,12 @@ class Tour extends React.Component {
         <Route
           exact
           path={`${match.path}`}
-          render={() => <AllToursContainer isLoading={loading} />}
+          render={() => (
+            <AllToursContainer
+              title="Midway - Tất cả tour"
+              isLoading={loading}
+            />
+          )}
         />
         <Route
           exact
@@ -49,11 +54,11 @@ class Tour extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: selectTourLoading
+  loading: selectTourLoading,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getTourStart: () => dispatch(getTourStart())
+const mapDispatchToProps = (dispatch) => ({
+  getTourStart: () => dispatch(getTourStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tour);

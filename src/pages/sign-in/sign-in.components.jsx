@@ -6,7 +6,7 @@ import API from "../../api/baseURL";
 import {
   googleSignInStart,
   facebookSignInStart,
-  signInWithEmail
+  signInWithEmail,
 } from "../../redux/user/user.action";
 
 import "./sign-in.styles.scss";
@@ -27,13 +27,13 @@ export const validateInput = (type, checkingText) => {
       return {
         isInputValid: true,
         errorMessage: "",
-        isValid: true
+        isValid: true,
       };
     } else {
       return {
         isInputValid: false,
         errorMessage: "Email của bạn không đúng dạng",
-        isValid: false
+        isValid: false,
       };
     }
   }
@@ -42,13 +42,13 @@ export const validateInput = (type, checkingText) => {
       return {
         isInputValid: false,
         errorMessage: "Mật khẩu cần ít nhất 8 kí tự",
-        isValid: false
+        isValid: false,
       };
     } else {
       return {
         isInputValid: true,
         errorMessage: "",
-        isValid: true
+        isValid: true,
       };
     }
   }
@@ -63,24 +63,25 @@ class SignIn extends React.Component {
         value: "",
         isInputValid: true,
         errorMessage: "",
-        isValid: false
+        isValid: false,
       },
       password: {
         value: "",
         isInputValid: true,
         errorMessage: "",
-        isValid: false
+        isValid: false,
       },
       user: "",
-      message: ""
+      message: "",
     };
   }
 
   componentDidMount() {
-    API.get("user").then(res => this.setState({ user: res.data }));
+    API.get("user").then((res) => this.setState({ user: res.data }));
+    document.title = this.props.title;
   }
 
-  handleInputValidation = event => {
+  handleInputValidation = (event) => {
     const { name } = event.target;
     const { isInputValid, errorMessage, isValid } = validateInput(
       name,
@@ -93,21 +94,21 @@ class SignIn extends React.Component {
     this.setState({ [name]: newState });
   };
 
-  handleChange = event => {
+  handleChange = (event) => {
     let { name, value } = event.target;
     const newState = { ...this.state[name] };
     newState.value = value;
     this.setState({
-      [name]: newState
+      [name]: newState,
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const { email, password, user } = this.state;
     const { signInWithEmail } = this.props;
 
-    user.map(item => {
+    user.map((item) => {
       if (item.email === email.value && item.password === password.value) {
         signInWithEmail(email.value, password.value);
       } else {
@@ -211,11 +212,11 @@ class SignIn extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   facebookSignInStart: () => dispatch(facebookSignInStart()),
   signInWithEmail: (email, password) =>
-    dispatch(signInWithEmail({ email, password }))
+    dispatch(signInWithEmail({ email, password })),
 });
 
 export default connect(null, mapDispatchToProps)(SignIn);

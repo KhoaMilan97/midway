@@ -2,13 +2,13 @@ import React, { lazy, Suspense } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import md5 from "md5";
 
 import { selectCurrentUser } from "./redux/user/user.selector";
 
 import Header from "./components/header/header.components";
 import Footer from "./components/footer/footer.components";
 import Spinner from "./components/spinner/spinner.components";
+import ScrollToTop from "./util/scrollToTop";
 
 import "./App.css";
 
@@ -24,39 +24,80 @@ const Confirmation = lazy(() =>
 const CheckOutPages = lazy(() =>
   import("./pages/check-out/check-out.components")
 );
+const ContactPages = lazy(() =>
+  import("./pages/contact-us/contact-pages.components")
+);
 
 class App extends React.Component {
   render() {
-    console.log(md5("123456"));
     const { currentUser } = this.props;
     return (
       <div className="App">
         <Header currentUser={currentUser} />
         <Suspense fallback={<Spinner />}>
+          <ScrollToTop />
           <Switch>
-            <Route exact path="/about" component={About} />
+            <Route
+              exact
+              path="/about"
+              render={() => <About title="Midway - Giới thiệu" />}
+            />
             <Route
               exact
               path="/sign-in"
-              render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <SignIn title="Midway - Đăng nhập" />
+                )
+              }
             />
             <Route
               exact
               path="/sign-up"
-              render={() => (currentUser ? <Redirect to="/" /> : <SignUp />)}
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <SignUp title="Midway - Đăng kí" />
+                )
+              }
             />
 
             <Route
               exact
               path="/checkout"
               render={() =>
-                !currentUser ? <Redirect to="/sign-in" /> : <CheckOutPages />
+                !currentUser ? (
+                  <Redirect to="/sign-in" />
+                ) : (
+                  <CheckOutPages title="Midway - Thanh toán" />
+                )
               }
             />
-            <Route path="/tours" component={TourPages} />
-            <Route exact path="/confirm" component={Confirmation} />
-            <Route exact path="/" component={HomePages} />
-            <Route path="*" component={NotFound} />
+            <Route path="/tours" render={(props) => <TourPages {...props} />} />
+            <Route
+              exact
+              path="/confirm"
+              render={() => (
+                <Confirmation title="Midway - xác nhận thanh toán" />
+              )}
+            />
+            <Route
+              exact
+              path="/contact"
+              render={() => <ContactPages title="Midway - Liên hệ" />}
+            />
+            <Route
+              exact
+              path="/"
+              render={() => <HomePages title="Midway Travel" />}
+            />
+            <Route
+              path="*"
+              render={() => <NotFound title="Midway - không tìm thấy trang" />}
+            />
           </Switch>
         </Suspense>
         <Footer />
@@ -66,7 +107,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(App);
