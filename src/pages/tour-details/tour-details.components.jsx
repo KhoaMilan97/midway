@@ -188,7 +188,6 @@ class TourDetails extends React.Component {
                     </div>
                   </div>
                 </div>
-
                 <hr />
                 <div className="row">
                   <div className="col-lg-3">
@@ -341,11 +340,9 @@ class TourDetails extends React.Component {
                         <td>Trẻ em</td>
                         <td className="text-right">{children}</td>
                       </tr>
-
                       <tr className="total">
                         <td>Tổng tiền</td>
                         <td className="text-right">
-                          {" "}
                           {(
                             adult * (toursDetails.tour_price * 0.2) +
                             children * (toursDetails.tour_price * 0.1) +

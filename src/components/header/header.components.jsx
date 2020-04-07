@@ -125,21 +125,19 @@ class Header extends React.Component {
                         Giới thiệu
                       </Link>
                     </li>
-                    <li className="submenu">
-                      <Link to="/tours" className="show-submenu">
-                        Tất cả Tour
-                      </Link>
-                    </li>
-                    {types.map((type) => (
-                      <li key={type.id} className="submenu">
-                        <Link
-                          to={`/tours/${type.type_link}/${type.id}`}
-                          className="show-submenu"
-                        >
-                          {type.name_type}
-                        </Link>
-                      </li>
-                    ))}
+
+                    {types
+                      .map((type) => (
+                        <li key={type.id} className="submenu">
+                          <Link
+                            to={`/tours/${type.type_link}/${type.id}`}
+                            className="show-submenu"
+                          >
+                            {type.name_type}
+                          </Link>
+                        </li>
+                      ))
+                      .slice(0, 4)}
                   </ul>
                 </div>
                 {/* End main-menu */}
