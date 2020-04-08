@@ -12,7 +12,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         cartItems: action.payload,
       };
-    case cartTypes.BOOK_TOUR_START:
+    case cartTypes.BOOK_TOUR_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -22,6 +22,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: null,
       };
+
     default:
       return state;
   }

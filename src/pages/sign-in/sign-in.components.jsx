@@ -144,17 +144,17 @@ class SignIn extends React.Component {
                       type="button"
                       className="social_bt facebook"
                     >
-                      Login with Facebook
+                      Đăng nhập bằng Facebook
                     </button>
                     <button
                       onClick={googleSignInStart}
                       type="button"
                       className="social_bt google"
                     >
-                      Login with Google
+                      Đăng nhập bằng Google
                     </button>
                     <div className="divider">
-                      <span>Or</span>
+                      <span>Hoặc</span>
                     </div>
                     {message.length > 0 ? (
                       <div className="alert alert-danger">{message}</div>
@@ -178,7 +178,7 @@ class SignIn extends React.Component {
                     </div>
 
                     <div className="form-group">
-                      <label>Password</label>
+                      <label>Mật khẩu</label>
                       <input
                         type="password"
                         name="password"

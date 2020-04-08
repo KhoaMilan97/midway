@@ -32,5 +32,5 @@ export const getTypeTours = (state, props) =>
 
 export const selectTourWithType = createSelector(
   [getTypeTours],
-  (toursWithTypes) => toursWithTypes
+  (toursWithTypes) => toursWithTypes.filter((item) => item.status2 === 1)
 );

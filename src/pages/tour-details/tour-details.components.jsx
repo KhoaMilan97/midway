@@ -46,12 +46,25 @@ class TourDetails extends React.Component {
     const priceChildren = toursDetails.tour_price * 0.1;
     const priceAdult = toursDetails.tour_price * 0.2;
 
+    /* Convert date to mysql date can accpet */
+    function formatDate(date1) {
+      return (
+        date1.getFullYear() +
+        "-" +
+        (date1.getMonth() < 9 ? "0" : "") +
+        (date1.getMonth() + 1) +
+        "-" +
+        (date1.getDate() < 10 ? "0" : "") +
+        date1.getDate()
+      );
+    }
+
     if (!currentUser) {
       history.push("/sign-in");
     } else {
       const cartItems = {
-        id: match.params.id,
-        date: date.toLocaleDateString(),
+        id: parseInt(match.params.id),
+        date: formatDate(date),
         time: time.toLocaleTimeString(),
         adult,
         children,
@@ -191,27 +204,18 @@ class TourDetails extends React.Component {
                 <hr />
                 <div className="row">
                   <div className="col-lg-3">
-                    <h3>Reviews </h3>
+                    <h3>Bình luận </h3>
                     <a
                       href="!#"
                       className="btn_1 add_bottom_30"
                       data-toggle="modal"
                       data-target="#myReview"
                     >
-                      Leave a review
+                      Viết bình luận
                     </a>
                   </div>
                   <div className="col-lg-9">
-                    <div id="general_rating">
-                      11 Reviews
-                      <div className="rating">
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile" />
-                        <i className="icon-smile" />
-                      </div>
-                    </div>
+                    <div id="general_rating">1 bình luận</div>
                     {/* End general_rating */}
 
                     <hr />

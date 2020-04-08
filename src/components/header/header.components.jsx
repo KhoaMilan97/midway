@@ -28,12 +28,25 @@ class Header extends React.Component {
   render() {
     const { signOutStart, currentUser, types } = this.props;
     let className = ["main-menu"];
+    let classLayer = ["layer"];
+    let classButton = [
+      "cmn-toggle-switch",
+      "cmn-toggle-switch__htx",
+      "open_close",
+    ];
     if (this.state.show) {
       className = ["main-menu", "show"];
+      classLayer = ["layer", "layer-is-visible"];
+      classButton = [
+        "cmn-toggle-switch",
+        "cmn-toggle-switch__htx",
+        "open_close",
+        "active",
+      ];
     }
     return (
       <div>
-        <div className="layer" />
+        <div className={classLayer.join(" ")} onClick={this.handleClick} />
         <header>
           <div id="top_line">
             <div className="container">
@@ -96,7 +109,7 @@ class Header extends React.Component {
               </div>
               <nav className="col-9">
                 <button
-                  className="cmn-toggle-switch cmn-toggle-switch__htx open_close"
+                  className={classButton.join(" ")}
                   onClick={this.handleClick}
                 >
                   <span>Menu mobile</span>
@@ -111,7 +124,11 @@ class Header extends React.Component {
                       data-retina="true"
                     />
                   </div>
-                  <button className="open_close" id="close_in">
+                  <button
+                    className="open_close"
+                    id="close_in"
+                    onClick={this.handleClick}
+                  >
                     <i className="icon_set_1_icon-77" />
                   </button>
                   <ul>

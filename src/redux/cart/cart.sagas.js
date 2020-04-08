@@ -16,7 +16,7 @@ export function* bookToursStart({ payload }) {
       time,
       adult,
       children,
-      totalPrice
+      totalPrice,
     } = payload;
 
     yield API.post(`bookTour`, {
@@ -28,7 +28,7 @@ export function* bookToursStart({ payload }) {
       email: email,
       mobile: phoneNumber,
       date: date,
-      time: time
+      time: time,
     });
     yield put(bookToursSuccess());
   } catch (err) {

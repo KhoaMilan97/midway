@@ -56,7 +56,7 @@ class CheckOutPages extends React.Component {
   render() {
     const { displayName, email, phoneNumber } = this.state;
     const { cartItems } = this.props;
-    console.log(this.props);
+
     return (
       <React.Fragment>
         <section id="hero_2">

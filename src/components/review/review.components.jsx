@@ -8,7 +8,7 @@ class Review extends React.Component {
       guide: "",
       price: "",
       quality: "",
-      comment: ""
+      comment: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -18,7 +18,7 @@ class Review extends React.Component {
   handleChange(event) {
     const { value, name } = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -70,7 +70,7 @@ class Review extends React.Component {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label>Position</label>
+                      <label>Vị trí</label>
                       <select
                         className="form-control"
                         id="position_review"
@@ -78,18 +78,18 @@ class Review extends React.Component {
                         value={position}
                         onChange={this.handleChange}
                       >
-                        <option value>Please review</option>
-                        <option value="1">Low</option>
-                        <option value="2">Sufficient</option>
-                        <option value="3">Good</option>
-                        <option value="4">Excellent</option>
-                        <option value="5">Super</option>
+                        <option value>Đánh giá của bạn</option>
+                        <option value="1">Kém</option>
+                        <option value="2">Trung bình</option>
+                        <option value="3">Khá</option>
+                        <option value="4">Tốt</option>
+                        <option value="5">Rất tốt</option>
                       </select>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label>Tourist guide</label>
+                      <label>Hương dẫn tour</label>
                       <select
                         className="form-control"
                         name="guide"
@@ -97,12 +97,12 @@ class Review extends React.Component {
                         value={guide}
                         onChange={this.handleChange}
                       >
-                        <option value>Please review</option>
-                        <option value="1">Low</option>
-                        <option value="2">Sufficient</option>
-                        <option value="3">Good</option>
-                        <option value="4">Excellent</option>
-                        <option value="5">Super</option>
+                        <option value>Đánh giá của bạn</option>
+                        <option value="1">Kém</option>
+                        <option value="2">Trung bình</option>
+                        <option value="3">Khá</option>
+                        <option value="4">Tốt</option>
+                        <option value="5">Rất tốt</option>
                       </select>
                     </div>
                   </div>
@@ -111,7 +111,7 @@ class Review extends React.Component {
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label>Price</label>
+                      <label>Giá cả</label>
                       <select
                         className="form-control"
                         name="price"
@@ -119,18 +119,18 @@ class Review extends React.Component {
                         value={price}
                         onChange={this.handleChange}
                       >
-                        <option value>Please review</option>
-                        <option value="1">Low</option>
-                        <option value="2">Sufficient</option>
-                        <option value="3">Good</option>
-                        <option value="4">Excellent</option>
-                        <option value="5">Super</option>
+                        <option value>Đánh giá của bạn</option>
+                        <option value="1">Kém</option>
+                        <option value="2">Trung bình</option>
+                        <option value="3">Khá</option>
+                        <option value="4">Tốt</option>
+                        <option value="5">Rất tốt</option>
                       </select>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label>Quality</label>
+                      <label>Chất lượng</label>
                       <select
                         className="form-control"
                         name="quality"
@@ -138,12 +138,12 @@ class Review extends React.Component {
                         value={quality}
                         onChange={this.handleChange}
                       >
-                        <option value>Please review</option>
-                        <option value="1">Low</option>
-                        <option value="2">Sufficient</option>
-                        <option value="3">Good</option>
-                        <option value="4">Excellent</option>
-                        <option value="5">Super</option>
+                        <option value>Đánh giá của bạn</option>
+                        <option value="1">Kém</option>
+                        <option value="2">Trung bình</option>
+                        <option value="3">Khá</option>
+                        <option value="4">Tốt</option>
+                        <option value="5">Rất tốt</option>
                       </select>
                     </div>
                   </div>
@@ -155,7 +155,7 @@ class Review extends React.Component {
                     id="review_text"
                     className="form-control"
                     style={{ height: "100px" }}
-                    placeholder="Write your review"
+                    placeholder="Viết đánh giá của bạn"
                     value={comment}
                     onChange={this.handleChange}
                   />

@@ -4,6 +4,8 @@ import { createStructuredSelector } from "reselect";
 
 import { selectCartItems } from "../../redux/cart/cart.selector";
 
+import "./summary.styles.scss";
+
 const Summary = ({ cartItems }) => {
   return (
     <div className="box_style_1">
@@ -23,7 +25,7 @@ const Summary = ({ cartItems }) => {
             <td className="text-right">
               {cartItems.price.toLocaleString("it-IT", {
                 style: "currency",
-                currency: "VND"
+                currency: "VND",
               })}
             </td>
           </tr>
@@ -32,7 +34,7 @@ const Summary = ({ cartItems }) => {
             <td className="text-right">
               {cartItems.totalCost.toLocaleString("it-IT", {
                 style: "currency",
-                currency: "VND"
+                currency: "VND",
               })}
             </td>
           </tr>
@@ -43,7 +45,7 @@ const Summary = ({ cartItems }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems
+  cartItems: selectCartItems,
 });
 
 export default connect(mapStateToProps)(Summary);
