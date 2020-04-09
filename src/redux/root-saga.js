@@ -4,12 +4,14 @@ import { userSaga } from "./user/user.sagas";
 import { tourSagas } from "./tour/tour.sagas";
 import { typeSagas } from "./type-tour/type_tour.saga";
 import { cartSagas } from "./cart/cart.sagas";
+import { reviewSaga } from "./review/revew.sagas";
 
 export function* rootSaga() {
   yield all([
     call(userSaga),
     call(tourSagas),
     call(typeSagas),
-    call(cartSagas)
+    call(cartSagas),
+    call(reviewSaga),
   ]);
 }

@@ -1,4 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { withRouter } from "react-router-dom";
+
+import { addReviewStart } from "../../redux/review/review.action";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 
 class Review extends React.Component {
   constructor() {
@@ -24,6 +30,35 @@ class Review extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const { addReviewStart, currentUser, match } = this.props;
+    const { position, guide, price, quality, comment } = this.state;
+    const point =
+      (parseInt(position) +
+        parseInt(guide) +
+        parseInt(quality) +
+        parseInt(price)) /
+      4;
+
+    /* Convert date to mysql date can accpet */
+    function formatDate(date1) {
+      return (
+        date1.getFullYear() +
+        "-" +
+        (date1.getMonth() < 9 ? "0" : "") +
+        (date1.getMonth() + 1) +
+        "-" +
+        (date1.getDate() < 10 ? "0" : "") +
+        date1.getDate()
+      );
+    }
+
+    addReviewStart({
+      id_tour: parseInt(match.params.id),
+      username: currentUser.displayName,
+      comment,
+      point,
+      date: formatDate(new Date()),
+    });
   }
 
   render() {
@@ -55,10 +90,9 @@ class Review extends React.Component {
             <div className="modal-body">
               <div id="message-review"></div>
               <form
-                method="post"
-                action="assets/review_tour.php"
                 name="review_tour"
                 id="review_tour"
+                onSubmit={this.handleSubmit}
               >
                 <input
                   name="tour_name"
@@ -176,4 +210,12 @@ class Review extends React.Component {
   }
 }
 
-export default Review;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+const mapDispatchToProps = (dispach) => ({
+  addReviewStart: (review) => dispach(addReviewStart(review)),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Review));

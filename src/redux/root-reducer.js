@@ -6,18 +6,20 @@ import userReducer from "./user/user.reducer";
 import tourReducer from "./tour/tour.reducer";
 import typeReducer from "./type-tour/type-tour.reducer";
 import cartReducer from "./cart/cart.reducer";
+import reviewReducer from "./review/review.reducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "cart"]
+  whitelist: ["user", "cart"],
 };
 
 const rootReducer = combineReducers({
   user: userReducer,
   tour: tourReducer,
   type: typeReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  review: reviewReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -10,15 +10,17 @@ import WithSpinner from "../../components/with-spinner/with-spinner.components";
 
 import { getTourStart } from "../../redux/tour/tour.action";
 import { selectTourLoading } from "../../redux/tour/tour.selector";
+import { getReviewStart } from "../../redux/review/review.action";
 
 const TopToursContainer = WithSpinner(TopTours);
 const PopularToursContainer = WithSpinner(PopularTours);
 
 class HomePages extends React.Component {
   componentDidMount() {
-    const { getTourStart } = this.props;
+    const { getTourStart, getReviewStart } = this.props;
     getTourStart();
     document.title = this.props.title;
+    getReviewStart();
   }
   render() {
     const { loading } = this.props;
@@ -52,7 +54,7 @@ class HomePages extends React.Component {
                           className="img-fluid"
                         />
                         <div className="wrapper">
-                          <h2>Tours miền bắc</h2>
+                          <h2>Tour miền bắc</h2>
                           <p>800 Locations</p>
                         </div>
                       </Link>
@@ -78,7 +80,7 @@ class HomePages extends React.Component {
                           className="img-fluid"
                         />
                         <div className="wrapper">
-                          <h2>Tours miền nam</h2>
+                          <h2>Tour miền nam</h2>
                           <p>1132 Locations</p>
                         </div>
                       </Link>
@@ -94,26 +96,26 @@ class HomePages extends React.Component {
           <div className="container margin_60">
             <div className="main_title">
               <h2>
-                <span>Tours</span> hot
+                <span>Tour</span> hot
               </h2>
             </div>
             <TopToursContainer isLoading={loading} />
 
             <p className="text-center add_bottom_30">
               <Link to="/tours" className="btn_1">
-                Xem tất cả tours
+                Xem tất cả tour
               </Link>
             </p>
             <hr className="mt-5 mb-5" />
             <div className="main_title">
               <h2>
-                <span>Tours</span> phổ biến
+                <span>Tour</span> phổ biến
               </h2>
             </div>
             <PopularToursContainer isLoading={loading} />
             <p className="text-center nopadding">
               <Link to="/tours" className="btn_1">
-                Xem tất cả tours
+                Xem tất cả tour
               </Link>
             </p>
           </div>
@@ -189,6 +191,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   getTourStart: () => dispatch(getTourStart()),
+  getReviewStart: () => dispatch(getReviewStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePages);

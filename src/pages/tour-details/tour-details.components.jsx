@@ -7,9 +7,12 @@ import { Markup } from "interweave";
 import { selectTourDetails } from "../../redux/tour/tour.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
 import { addCartItems } from "../../redux/cart/cart.action";
+import { selectReviewsWithTours } from "../../redux/review/review.selector";
+import { getReviewStart } from "../../redux/review/review.action";
 
 import Gallery from "../../components/gallerry/gallery.components";
 import Review from "../../components/review/review.components";
+import ReviewItem from "../../components/review-item/review-item.components";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./tour-details.styles.scss";
@@ -24,8 +27,9 @@ class TourDetails extends React.Component {
   };
 
   componentDidMount() {
-    const { toursDetails } = this.props;
+    const { toursDetails, getReviewStart } = this.props;
     document.title = `Midways - ${toursDetails.tour_name}`;
+    getReviewStart();
   }
 
   onChange = (date) => this.setState({ date });
@@ -128,8 +132,10 @@ class TourDetails extends React.Component {
   };
 
   render() {
-    const { toursDetails } = this.props;
+    const { toursDetails, currentUser, review } = this.props;
     const { adult, children } = this.state;
+
+    console.log(review);
 
     if (!toursDetails) return <Redirect to="/tours" />;
     return (
@@ -205,38 +211,25 @@ class TourDetails extends React.Component {
                 <div className="row">
                   <div className="col-lg-3">
                     <h3>Bình luận </h3>
-                    <a
-                      href="!#"
-                      className="btn_1 add_bottom_30"
-                      data-toggle="modal"
-                      data-target="#myReview"
-                    >
-                      Viết bình luận
-                    </a>
+                    {currentUser ? (
+                      <a
+                        href="!#"
+                        className="btn_1 add_bottom_30"
+                        data-toggle="modal"
+                        data-target="#myReview"
+                      >
+                        Viết bình luận
+                      </a>
+                    ) : null}
                   </div>
                   <div className="col-lg-9">
-                    <div id="general_rating">1 bình luận</div>
+                    <div id="general_rating">{review.length} bình luận</div>
                     {/* End general_rating */}
-
                     <hr />
+                    {review.map((review, index) => (
+                      <ReviewItem key={index} {...review} />
+                    ))}
 
-                    <div className="review_strip_single">
-                      <small> - 10 March 2015 -</small>
-                      <h4 style={{ marginLeft: 0 }}>Jhon Doe</h4>
-                      <p>
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Sed a lorem quis neque interdum consequat ut sed
-                        sem. Duis quis tempor nunc. Interdum et malesuada fames
-                        ac ante ipsum primis in faucibus."
-                      </p>
-                      <div className="rating">
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile voted" />
-                        <i className="icon-smile" />
-                        <i className="icon-smile" />
-                      </div>
-                    </div>
                     {/* End review strip */}
                   </div>
                 </div>
@@ -394,10 +387,12 @@ class TourDetails extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
   toursDetails: selectTourDetails(state, ownProps.match.params.id),
   currentUser: selectCurrentUser(state),
+  review: selectReviewsWithTours(state, ownProps.match.params.id),
 });
 
 const mapDispatchToPorps = (dispatch) => ({
   addCartItems: (cartItems) => dispatch(addCartItems(cartItems)),
+  getReviewStart: () => dispatch(getReviewStart()),
 });
 
 export default withRouter(
