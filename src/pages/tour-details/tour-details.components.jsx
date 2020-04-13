@@ -135,8 +135,6 @@ class TourDetails extends React.Component {
     const { toursDetails, currentUser, review } = this.props;
     const { adult, children } = this.state;
 
-    console.log(review);
-
     if (!toursDetails) return <Redirect to="/tours" />;
     return (
       <React.Fragment>
@@ -212,15 +210,12 @@ class TourDetails extends React.Component {
                   <div className="col-lg-3">
                     <h3>Bình luận </h3>
                     {currentUser ? (
-                      <a
-                        href="!#"
-                        className="btn_1 add_bottom_30"
-                        data-toggle="modal"
-                        data-target="#myReview"
-                      >
-                        Viết bình luận
-                      </a>
-                    ) : null}
+                      <Review />
+                    ) : (
+                      <span>
+                        Bạn cần <Link to="/sign-in">Đăng nhập</Link> để nhận xét
+                      </span>
+                    )}
                   </div>
                   <div className="col-lg-9">
                     <div id="general_rating">{review.length} bình luận</div>
@@ -237,12 +232,12 @@ class TourDetails extends React.Component {
               {/*End  single_tour_desc*/}
               <aside className="col-lg-4">
                 <div className="box_style_1 expose">
-                  <h3 className="inner">- Booking -</h3>
+                  <h3 className="inner">- Đạt Tour -</h3>
                   <div className="row">
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label>
-                          <i className="icon-calendar-7" /> Select a date
+                          <i className="icon-calendar-7" /> Chọn ngày đi
                         </label>
                         <DatePicker
                           selected={this.state.date}
@@ -255,7 +250,7 @@ class TourDetails extends React.Component {
                     <div className="col-sm-6">
                       <div className="form-group">
                         <label>
-                          <i className=" icon-clock" /> Time
+                          <i className=" icon-clock" /> Chọn giờ đi
                         </label>
                         <DatePicker
                           selected={this.state.time}
@@ -375,7 +370,6 @@ class TourDetails extends React.Component {
           <div id="overlay" />
           {/* Mask on input focus */}
         </main>
-        <Review />
       </React.Fragment>
     );
   }

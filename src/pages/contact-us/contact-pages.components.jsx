@@ -22,9 +22,9 @@ class ContactPages extends React.Component {
             <div className="container">
               <ul>
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link to="/">Trang chủ</Link>
                 </li>
-                <li>Contact Us</li>
+                <li>Liên hệ</li>
               </ul>
             </div>
           </div>
@@ -37,9 +37,9 @@ class ContactPages extends React.Component {
                     <strong>
                       <i className="icon-pencil" />
                     </strong>
-                    Fill the form below
+                    Điền vào mẫu bên dưới
                   </h3>
-                  <p>Mussum ipsum cacilds, vidis litro abertis.</p>
+                  <p>Chúng tôi sẽ phản hồi bạn sớm nhất có thể.</p>
                 </div>
                 <div className="step">
                   <div id="message-contact" />
@@ -51,25 +51,25 @@ class ContactPages extends React.Component {
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>First Name</label>
+                          <label>Họ và chữ lót</label>
                           <input
                             type="text"
                             className="form-control"
                             id="name_contact"
                             name="name_contact"
-                            placeholder="Enter Name"
+                            placeholder="vd: Nguyễn Văn"
                           />
                         </div>
                       </div>
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>Last Name</label>
+                          <label>Tên</label>
                           <input
                             type="text"
                             className="form-control"
                             id="lastname_contact"
                             name="lastname_contact"
-                            placeholder="Enter Last Name"
+                            placeholder="vd: Tèo"
                           />
                         </div>
                       </div>
@@ -78,25 +78,25 @@ class ContactPages extends React.Component {
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>Email</label>
+                          <label>Địa chỉ email</label>
                           <input
                             type="email"
                             id="email_contact"
                             name="email_contact"
                             className="form-control"
-                            placeholder="Enter Email"
+                            placeholder="vd: teo@gmail.com"
                           />
                         </div>
                       </div>
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <label>Phone</label>
+                          <label>Số điện thoại</label>
                           <input
                             type="text"
                             id="phone_contact"
                             name="phone_contact"
                             className="form-control"
-                            placeholder="Enter Phone number"
+                            placeholder="vd: 0963232863"
                           />
                         </div>
                       </div>
@@ -104,13 +104,13 @@ class ContactPages extends React.Component {
                     <div className="row">
                       <div className="col-sm-12">
                         <div className="form-group">
-                          <label>Message</label>
+                          <label>Lời nhắn</label>
                           <textarea
                             rows={5}
                             id="message_contact"
                             name="message_contact"
                             className="form-control"
-                            placeholder="Write your message"
+                            placeholder="Nhập lời nhắn của bạn ở đây"
                             style={{ height: "200px" }}
                             defaultValue={""}
                           />
@@ -135,39 +135,43 @@ class ContactPages extends React.Component {
                 <div className="box_style_1">
                   <span className="tape" />
                   <h4>
-                    Address{" "}
+                    Địa chỉ{" "}
                     <span>
                       <i className="icon-pin pull-right" />
                     </span>
                   </h4>
-                  <p>Place Charles de Gaulle, 75008 Paris</p>
+                  <p>
+                    Công viên phần mềm Quang, QTSC Building 1, Trung, P, Quận
+                    12, Hồ Chí Minh
+                  </p>
                   <hr />
                   <h4>
-                    Help center{" "}
+                    Trung tâm trợ giúp{" "}
                     <span>
                       <i className="icon-help pull-right" />
                     </span>
                   </h4>
                   <p>
-                    Lorem ipsum dolor sit amet, vim id accusata sensibus, id
-                    ridens quaeque qui. Ne qui vocent ornatus molestie.
+                    Tiếp nhận thông tin đóng góp khách hàng nhằm mục đích cải
+                    tiến dịch vụ tốt nhất dành cho khách hàng. Mọi chi tiết
+                    nhanh nhất vui lòng liên hệ số điện thoại bên dưới.
                   </p>
                   <ul id="contact-info">
-                    <li>+ 61 (2) 8093 3400 / + 61 (2) 8093 3402</li>
+                    <li>+ 84 96 3232 864 / + 84 985 007 449</li>
                     <li>
-                      <a href="!#">info@domain.com</a>
+                      <a href="!#">khoamilan123@gmail.com</a>
                     </li>
                   </ul>
                 </div>
                 <div className="box_style_4">
                   <i className="icon_set_1_icon-57" />
                   <h4>
-                    Need <span>Help?</span>
+                    Cần <span>giúp đỡ?</span>
                   </h4>
-                  <a href="tel://004542344599" className="phone">
-                    +45 423 445 99
+                  <a href="tel://0963232864" className="phone">
+                    +84 96 3232 864
                   </a>
-                  <small>Monday to Friday 9.00am - 7.30pm</small>
+                  <small>Thứ 2 đến Thứ 6: 9.00am - 7.30pm</small>
                 </div>
               </div>
               {/* End col-md-4 */}

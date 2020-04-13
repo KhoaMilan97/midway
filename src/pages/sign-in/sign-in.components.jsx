@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import API from "../../api/baseURL";
 
@@ -55,6 +55,7 @@ export const validateInput = (type, checkingText) => {
 };
 
 class SignIn extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
 
@@ -77,7 +78,13 @@ class SignIn extends React.Component {
   }
 
   componentDidMount() {
-    API.get("user").then((res) => this.setState({ user: res.data }));
+    this._isMounted = true;
+
+    API.get("user").then((res) => {
+      if (this._isMounted) {
+        this.setState({ user: res.data });
+      }
+    });
     document.title = this.props.title;
   }
 
@@ -106,20 +113,28 @@ class SignIn extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { email, password, user } = this.state;
-    const { signInWithEmail } = this.props;
+    const { signInWithEmail, history } = this.props;
 
-    user.map((item) => {
-      if (item.email === email.value && item.password === password.value) {
-        signInWithEmail(email.value, password.value);
-      } else {
-        this.setState({ message: "Tài khoản / Mật khẩu không chính xác" });
-        setTimeout(() => {
-          this.setState({ message: "" });
-        }, 3000);
-      }
-      return item;
+    const checkUser = user.find((item) => {
+      return item.email === email.value && item.pass === password.value;
     });
+
+    if (checkUser) {
+      signInWithEmail(email.value, password.value);
+      this.setState({ message: "Đăng nhập thành công" });
+      history.goBack();
+    } else {
+      this.setState({ message: "Tài khoản / Mật khẩu không chính xác" });
+      setTimeout(() => {
+        this.setState({ message: "" });
+      }, 3000);
+    }
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
     const { googleSignInStart, facebookSignInStart } = this.props;
     const { email, password, message } = this.state;
@@ -219,4 +234,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(signInWithEmail({ email, password })),
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default withRouter(connect(null, mapDispatchToProps)(SignIn));

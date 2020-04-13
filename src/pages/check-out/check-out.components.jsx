@@ -16,8 +16,8 @@ class CheckOutPages extends React.Component {
     const { currentUser } = this.props;
 
     this.state = {
-      displayName: currentUser.displayName,
-      email: currentUser.email,
+      displayName: currentUser.displayName || "",
+      email: currentUser.email || "",
       phoneNumber: currentUser.phoneNumber || "",
     };
   }

@@ -17,6 +17,20 @@ class Header extends React.Component {
   componentDidMount() {
     const { getTypeStart } = this.props;
     getTypeStart();
+
+    window.addEventListener("scroll", () => {
+      let activeClass = "";
+      if (window.scrollY >= 1) {
+        activeClass = "sticky";
+      } else {
+        activeClass = "";
+      }
+      this.setState({ activeClass });
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll");
   }
 
   handleClick = () => {
@@ -47,7 +61,7 @@ class Header extends React.Component {
     return (
       <div>
         <div className={classLayer.join(" ")} onClick={this.handleClick} />
-        <header>
+        <header className={this.state.activeClass}>
           <div id="top_line">
             <div className="container">
               <div className="row">
@@ -117,7 +131,7 @@ class Header extends React.Component {
                 <div className={className.join(" ")}>
                   <div id="header_menu">
                     <img
-                      src="img/logo_sticky.png"
+                      src="img/logo_midway_sticky.png"
                       width={160}
                       height={34}
                       alt="City tours"

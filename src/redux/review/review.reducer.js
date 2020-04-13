@@ -17,7 +17,7 @@ const reviewReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: null,
-        reviews: [...state.reviews, { ...action.payload }],
+        reviews: [{ ...action.payload }, ...state.reviews],
       };
     case reviewTypes.GET_REVIEW_SUCCESS:
       return {

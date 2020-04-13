@@ -8,6 +8,7 @@ import { linkGallery } from "../../util/linkImage";
 import "./gallery.stylles.scss";
 
 class Gallery extends React.Component {
+  _isMounted = false;
   constructor() {
     super();
     this.state = {
@@ -28,17 +29,24 @@ class Gallery extends React.Component {
         thumbnailPosition: "bottom",
         showVideo: {},
       },
-      gallery: "",
+      gallery: [],
     };
   }
 
   componentDidMount() {
+    this._isMounted = true;
     const { match } = this.props;
     API.get(`gallery/${parseInt(match.params.id)}`).then((gallery) => {
-      this.setState({
-        gallery: gallery.data,
-      });
+      if (this._isMounted) {
+        this.setState({
+          gallery: gallery.data,
+        });
+      }
     });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   setImage = () => {

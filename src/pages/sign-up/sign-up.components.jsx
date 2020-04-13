@@ -18,6 +18,8 @@ import {
   emailExist,
 } from "../../util/checkValidate.components";
 
+import "./sign-up.styles.scss";
+
 class SignUp extends React.Component {
   constructor(props) {
     super(props);

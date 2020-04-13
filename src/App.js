@@ -9,6 +9,7 @@ import Header from "./components/header/header.components";
 import Footer from "./components/footer/footer.components";
 import Spinner from "./components/spinner/spinner.components";
 import ScrollToTop from "./util/scrollToTop";
+import Scroll from "./components/scrol/scroll.components";
 
 import "./App.css";
 
@@ -100,6 +101,7 @@ class App extends React.Component {
             />
           </Switch>
         </Suspense>
+        <Scroll />
         <Footer />
       </div>
     );

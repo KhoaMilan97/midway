@@ -5,7 +5,7 @@ import API from "../../api/baseURL";
 import {
   auth,
   googleProvider,
-  facebookProvider
+  facebookProvider,
 } from "../../firebase/firebase.utils";
 
 import {
@@ -14,7 +14,7 @@ import {
   signOutSuccess,
   signOutFailure,
   registerFailure,
-  registerSuccess
+  registerSuccess,
 } from "./user.action";
 
 import userTypes from "./user.types";
@@ -23,7 +23,10 @@ import userTypes from "./user.types";
 export function* googleSignIn() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    const { displayName, email, uid } = user;
+    const { displayName, email } = user;
+
+    let token = yield auth.currentUser.getIdToken(/* forceRefresh */ true);
+
     // yield API.post("insert", {
     //   uid: uid,
     //   email: email,
@@ -33,7 +36,7 @@ export function* googleSignIn() {
     //   phone: user.phoneNumber
     // });
 
-    yield put(signInSuccess({ displayName, email, uid }));
+    yield put(signInSuccess({ displayName, email, token }));
   } catch (err) {
     yield put(signInFailure(err.message));
   }
@@ -48,7 +51,7 @@ export function* facebookSignin() {
   try {
     const { user } = yield auth.signInWithPopup(facebookProvider);
     const { displayName, email, uid } = user;
-    console.log(user);
+
     // yield API.post("insert", {
     //   uid: uid,
     //   email: email,
@@ -84,30 +87,27 @@ export function* onSignOutStart() {
 
 /* Register account */
 export function* register({
-  payload: { email, password, displayName, phone }
+  payload: { email, password, displayName, phone },
 }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
     yield API.post("insert", {
-      uid: user.uid,
       fullname: displayName,
-      password: password,
+      pass: password,
       email: email,
       address: null,
-      phone: phone
+      phone: phone,
+      role: 0,
     });
-    yield auth.onAuthStateChanged(function(user) {
+    yield auth.onAuthStateChanged(function (user) {
       if (user) {
         user.updateProfile({
-          displayName: displayName
+          displayName: displayName,
         });
       }
     });
-    yield put(
-      registerSuccess({ user: { email, password }, displayName, phone })
-    );
+    yield put(registerSuccess({ user: { email }, displayName, phone }));
   } catch (err) {
-    console.log(email, password);
     yield put(registerFailure(err.message));
   }
 }
@@ -121,7 +121,9 @@ export function* signIn({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     const displayName = user.displayName;
-    yield put(signInSuccess({ displayName, email, password }));
+    // let token = yield auth.currentUser.getIdToken(/* forceRefresh */ true);
+
+    yield put(signInSuccess({ displayName, email }));
   } catch (err) {
     yield put(signInFailure(err.message));
   }
@@ -134,12 +136,12 @@ export function* onSignInWithEmail() {
 /* SignInAfter SignUp */
 export function* signInAfterSignUp({
   payload: {
-    user: { email, password }
-  }
+    user: { email, password },
+  },
 }) {
   const { user } = yield auth.signInWithEmailAndPassword(email, password);
   const displayName = user.displayName;
-  yield put(signInSuccess({ displayName, email, password }));
+  yield put(signInSuccess({ displayName, email }));
 }
 
 export function* onSignInaAfterSignUp() {
@@ -154,6 +156,6 @@ export function* userSaga() {
     call(onSignOutStart),
     call(onRegister),
     call(onSignInWithEmail),
-    call(onSignInaAfterSignUp)
+    call(onSignInaAfterSignUp),
   ]);
 }
