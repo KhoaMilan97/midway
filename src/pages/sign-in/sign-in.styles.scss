@@ -88,18 +88,12 @@
   }
 }
 
-button:disabled,
-button[disabled] {
-  background-color: #c7c6c6;
-  cursor: not-allowed;
-  border: 1px solid #ccc;
-  color: #888;
-}
+a.lost-password {
+  margin-bottom: 10px;
+  display: block;
+  color: blue;
 
-button:disabled,
-button[disabled]:hover {
-  background-color: #c7c6c6;
-  cursor: not-allowed;
-  border: 1px solid #ccc;
-  color: #888;
+  &:hover {
+    color: lightblue;
+  }
 }

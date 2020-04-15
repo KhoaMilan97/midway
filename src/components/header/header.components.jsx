@@ -29,10 +29,6 @@ class Header extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll");
-  }
-
   handleClick = () => {
     this.setState({
       show: !this.state.show,

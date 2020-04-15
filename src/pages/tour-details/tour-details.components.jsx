@@ -28,8 +28,10 @@ class TourDetails extends React.Component {
 
   componentDidMount() {
     const { toursDetails, getReviewStart } = this.props;
-    document.title = `Midways - ${toursDetails.tour_name}`;
-    getReviewStart();
+    if (toursDetails) {
+      document.title = `Midways - ${toursDetails.tour_name}`;
+      getReviewStart();
+    }
   }
 
   onChange = (date) => this.setState({ date });
@@ -135,7 +137,7 @@ class TourDetails extends React.Component {
     const { toursDetails, currentUser, review } = this.props;
     const { adult, children } = this.state;
 
-    if (!toursDetails) return <Redirect to="/tours" />;
+    if (!toursDetails) return <Redirect to="/" />;
     return (
       <React.Fragment>
         <section

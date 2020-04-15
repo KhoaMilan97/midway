@@ -68,7 +68,7 @@ class SignUp extends React.Component {
                   <div id="login">
                     <div className="text-center">
                       <img
-                        src="img/logo_sticky.png"
+                        src="img/logo_midway_sticky.png"
                         alt="logo sticky"
                         data-retina="true"
                       />

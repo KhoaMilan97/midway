@@ -28,6 +28,9 @@ const CheckOutPages = lazy(() =>
 const ContactPages = lazy(() =>
   import("./pages/contact-us/contact-pages.components")
 );
+const ForgotPassword = lazy(() =>
+  import("./pages/forgot-password/forget-password.components")
+);
 
 class App extends React.Component {
   render() {
@@ -87,13 +90,18 @@ class App extends React.Component {
             />
             <Route
               exact
+              path="/forgot-password"
+              render={() => <ForgotPassword title="Midway - Quên mật khẩu" />}
+            />
+            <Route
+              exact
               path="/contact"
               render={() => <ContactPages title="Midway - Liên hệ" />}
             />
             <Route
               exact
               path="/"
-              render={() => <HomePages title="Midway Travel" />}
+              render={() => <HomePages title="Midway - Travel" />}
             />
             <Route
               path="*"

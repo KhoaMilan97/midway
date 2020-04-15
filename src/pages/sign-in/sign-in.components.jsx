@@ -147,7 +147,7 @@ class SignIn extends React.Component {
                 <div id="login">
                   <div className="text-center">
                     <img
-                      src="img/logo_sticky.png"
+                      src="img/logo_midway_sticky.png"
                       alt="logo sticky"
                       data-retina="true"
                     />
@@ -213,6 +213,9 @@ class SignIn extends React.Component {
                     <button type="submit" className="btn_full">
                       Đăng nhập
                     </button>
+                    <Link to="/forgot-password" className="lost-password">
+                      <span>*Quên mật khẩu?</span>
+                    </Link>
                     <Link to="/sign-up" className="btn_full_outline">
                       Đăng kí
                     </Link>
