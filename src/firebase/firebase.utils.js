@@ -10,7 +10,7 @@ let firebaseConfig = {
   storageBucket: "midway-travel.appspot.com",
   messagingSenderId: "924729430845",
   appId: "1:924729430845:web:a6100cc7c9dbaa206deb54",
-  measurementId: "G-E90DEG2TT3"
+  measurementId: "G-E90DEG2TT3",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -21,17 +21,17 @@ export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 googleProvider.setCustomParameters({
-  prompt: "select_account"
+  prompt: "select_account",
 });
 
-facebookProvider.setCustomParameters({
-  prompt: "select_account",
-  display: "popup"
-});
+// facebookProvider.setCustomParameters({
+//   prompt: "select_account",
+//   display: "popup"
+// });
 
 export const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(userAuth => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       unsubscribe();
       resolve(userAuth);
     }, reject);

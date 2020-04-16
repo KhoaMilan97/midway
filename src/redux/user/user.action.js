@@ -2,56 +2,56 @@ import userTypes from "./user.types";
 
 /* Goolge and FB */
 export const googleSignInStart = () => ({
-  type: userTypes.GOOGLE_SIGN_IN_START
+  type: userTypes.GOOGLE_SIGN_IN_START,
 });
 
 export const facebookSignInStart = () => ({
-  type: userTypes.FACEBOOK_SIGN_IN_START
+  type: userTypes.FACEBOOK_SIGN_IN_START,
 });
 
-export const signInSuccess = user => ({
+export const signInSuccess = (user) => ({
   type: userTypes.SIGN_IN_SUCCESS,
-  payload: user
+  payload: user,
 });
 
-export const signInFailure = error => ({
+export const signInFailure = (error) => ({
   type: userTypes.SIGN_IN_FAILURE,
-  payload: error
+  payload: error,
 });
 
 /* Sign Out */
 
 export const signOutStart = () => ({
-  type: userTypes.SIGN_OUT_START
+  type: userTypes.SIGN_OUT_START,
 });
 
 export const signOutSuccess = () => ({
-  type: userTypes.SIGN_OUT_SUCCESS
+  type: userTypes.SIGN_OUT_SUCCESS,
 });
 
-export const signOutFailure = error => ({
+export const signOutFailure = (error) => ({
   type: userTypes.SIGN_OUT_FAILURE,
-  payload: error
+  payload: error,
 });
 
 /* Register */
-export const registerStart = userCredentials => ({
+export const registerStart = (userCredentials) => ({
   type: userTypes.REGISTER_EMAIL_START,
-  payload: userCredentials
+  payload: userCredentials,
 });
 
-export const registerSuccess = user => ({
+export const registerSuccess = (user) => ({
   type: userTypes.REGISTER_EMAIL_SUCCESS,
-  payload: user
+  payload: user,
 });
 
-export const registerFailure = error => ({
+export const registerFailure = (error) => ({
   type: userTypes.REGISTER_EMAIL_FAILURE,
-  payload: error
+  payload: error,
 });
 
 /* Sign In */
-export const signInWithEmail = userCredentials => ({
+export const signInWithEmail = (userCredentials) => ({
   type: userTypes.SIGN_IN_WITH_EMAIL,
-  payload: userCredentials
+  payload: userCredentials,
 });

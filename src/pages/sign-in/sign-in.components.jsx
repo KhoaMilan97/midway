@@ -1,11 +1,9 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import API from "../../api/baseURL";
 
 import {
   googleSignInStart,
-  facebookSignInStart,
   signInWithEmail,
 } from "../../redux/user/user.action";
 
@@ -72,19 +70,11 @@ class SignIn extends React.Component {
         errorMessage: "",
         isValid: false,
       },
-      user: "",
       message: "",
     };
   }
 
   componentDidMount() {
-    this._isMounted = true;
-
-    API.get("user").then((res) => {
-      if (this._isMounted) {
-        this.setState({ user: res.data });
-      }
-    });
     document.title = this.props.title;
   }
 
@@ -112,32 +102,15 @@ class SignIn extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { email, password, user } = this.state;
-    const { signInWithEmail, history } = this.props;
+    const { email, password } = this.state;
+    const { signInWithEmail } = this.props;
 
-    const checkUser = user.find((item) => {
-      return item.email === email.value && item.pass === password.value;
-    });
-
-    if (checkUser) {
-      signInWithEmail(email.value, password.value);
-      this.setState({ message: "Đăng nhập thành công" });
-      history.goBack();
-    } else {
-      this.setState({ message: "Tài khoản / Mật khẩu không chính xác" });
-      setTimeout(() => {
-        this.setState({ message: "" });
-      }, 3000);
-    }
+    signInWithEmail(email.value, password.value);
   };
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   render() {
-    const { googleSignInStart, facebookSignInStart } = this.props;
-    const { email, password, message } = this.state;
+    const { googleSignInStart, error } = this.props;
+    const { email, password } = this.state;
     return (
       <React.Fragment>
         <section id="hero" className="login">
@@ -154,13 +127,13 @@ class SignIn extends React.Component {
                   </div>
                   <hr />
                   <form onSubmit={this.handleSubmit}>
-                    <button
+                    {/* <button
                       onClick={facebookSignInStart}
                       type="button"
                       className="social_bt facebook"
                     >
                       Đăng nhập bằng Facebook
-                    </button>
+                    </button> */}
                     <button
                       onClick={googleSignInStart}
                       type="button"
@@ -171,8 +144,8 @@ class SignIn extends React.Component {
                     <div className="divider">
                       <span>Hoặc</span>
                     </div>
-                    {message.length > 0 ? (
-                      <div className="alert alert-danger">{message}</div>
+                    {error !== null ? (
+                      <div className="alert alert-danger">{error}</div>
                     ) : null}
                     <div className="form-group">
                       <label>Email</label>
@@ -230,11 +203,14 @@ class SignIn extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  error: state.user.error,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  facebookSignInStart: () => dispatch(facebookSignInStart()),
   signInWithEmail: (email, password) =>
     dispatch(signInWithEmail({ email, password })),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(SignIn));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignIn));
